@@ -1,0 +1,189 @@
+{
+  "sheet_info": {
+    "player_name_column": "A",
+    "player_name_start_row": 4,
+    "player_name_end_row": 240
+  },
+  "gameweeks": {
+    "1": {
+      "played": "D",
+      "match1": {
+        "start": "E",
+        "end": "AJ"
+      },
+      "match2": {
+        "start": "AK",
+        "end": "BP"
+      },
+      "total": "BQ"
+    },
+    "2": {
+      "played": "BR",
+      "match1": {
+        "start": "BS",
+        "end": "CX"
+      },
+      "match2": {
+        "start": "CY",
+        "end": "ED"
+      },
+      "total": "EE"
+    },
+    "3": {
+      "played": "EF",
+      "match1": {
+        "start": "EG",
+        "end": "FL"
+      },
+      "match2": {
+        "start": "FM",
+        "end": "GR"
+      },
+      "total": "GS"
+    },
+    "4": {
+      "played": "GT",
+      "match1": {
+        "start": "GU",
+        "end": "HZ"
+      },
+      "match2": {
+        "start": "IA",
+        "end": "JF"
+      },
+      "total": "JG"
+    },
+    "5": {
+      "played": "JH",
+      "match1": {
+        "start": "JI",
+        "end": "KN"
+      },
+      "match2": {
+        "start": "KO",
+        "end": "LT"
+      },
+      "total": "LU"
+    },
+    "6": {
+      "played": "LV",
+      "match1": {
+        "start": "LW",
+        "end": "NB"
+      },
+      "match2": {
+        "start": "NC",
+        "end": "OH"
+      },
+      "total": "OI"
+    },
+    "7": {
+      "played": "OJ",
+      "match1": {
+        "start": "OK",
+        "end": "PP"
+      },
+      "match2": {
+        "start": "PQ",
+        "end": "QV"
+      },
+      "total": "QW"
+    },
+    "8": {
+      "played": "QX",
+      "match1": {
+        "start": "QY",
+        "end": "SD"
+      },
+      "match2": {
+        "start": "SE",
+        "end": "TJ"
+      },
+      "total": "TK"
+    },
+    "9": {
+      "played": "TL",
+      "match1": {
+        "start": "TM",
+        "end": "UR"
+      },
+      "match2": {
+        "start": "US",
+        "end": "VX"
+      },
+      "total": "VY"
+    },
+    "10": {
+      "played": "VZ",
+      "match1": {
+        "start": "WA",
+        "end": "XF"
+      },
+      "match2": {
+        "start": "XG",
+        "end": "YL"
+      },
+      "total": "YM"
+    },
+    "11": {
+      "played": "YN",
+      "match1": {
+        "start": "YO",
+        "end": "ZT"
+      },
+      "match2": {
+        "start": "ZU",
+        "end": "AAZ"
+      },
+      "total": "ABA"
+    },
+    "12": {
+      "played": "ABB",
+      "match1": {
+        "start": "ABC",
+        "end": "ACH"
+      },
+      "match2": {
+        "start": "ACI",
+        "end": "ADN"
+      },
+      "total": "ADO"
+    },
+    "13": {
+      "played": "ADP",
+      "match1": {
+        "start": "ADQ",
+        "end": "AEV"
+      },
+      "match2": {
+        "start": "AEW",
+        "end": "AGB"
+      },
+      "total": "AGC"
+    },
+    "14": {
+      "played": "AGD",
+      "match1": {
+        "start": "AGE",
+        "end": "AHJ"
+      },
+      "match2": {
+        "start": "AHK",
+        "end": "AIP"
+      },
+      "total": "AIQ"
+    },
+    "15": {
+      "played": "AIR",
+      "match1": {
+        "start": "AIS",
+        "end": "AJX"
+      },
+      "match2": {
+        "start": "AJY",
+        "end": "ALD"
+      },
+      "total": "ALE"
+    }
+  }
+}

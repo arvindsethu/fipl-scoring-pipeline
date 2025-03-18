@@ -1,0 +1,516 @@
+{
+    "player_types": ["Batter", "Keeper", "Allrounder", "Bowler"],
+    "run_scoring": {
+        "run": {
+            "Batter": 1,
+            "Keeper": 1,
+            "Allrounder": 1,
+            "Bowler": 1
+        },
+        "four": {
+            "Batter": 4,
+            "Keeper": 4,
+            "Allrounder": 4,
+            "Bowler": 4
+        },
+        "six": {
+            "Batter": 6,
+            "Keeper": 6,
+            "Allrounder": 6,
+            "Bowler": 6
+        },
+        "duck": {
+            "Batter": -10,
+            "Keeper": -10,
+            "Allrounder": -10,
+            "Bowler": -1
+        },
+        "milestone_30": {
+            "Batter": 20,
+            "Keeper": 20,
+            "Allrounder": 20,
+            "Bowler": 30
+        },
+        "milestone_50": {
+            "Batter": 45,
+            "Keeper": 45,
+            "Allrounder": 45,
+            "Bowler": 60
+        },
+        "milestone_75": {
+            "Batter": 75,
+            "Keeper": 75,
+            "Allrounder": 75,
+            "Bowler": 100
+        },
+        "milestone_100": {
+            "Batter": 100,
+            "Keeper": 100,
+            "Allrounder": 100,
+            "Bowler": 150
+        },
+        "milestone_150": {
+            "Batter": 150,
+            "Keeper": 150,
+            "Allrounder": 150,
+            "Bowler": 225
+        }
+    },
+    "strike_rate": {
+        "below_70": {
+            "min_balls": 15,
+            "Batter": -30,
+            "Keeper": -30,
+            "Allrounder": -30,
+            "Bowler": -10
+        },
+        "below_90": {
+            "min_balls": 15,
+            "Batter": -15,
+            "Keeper": -15,
+            "Allrounder": -15,
+            "Bowler": 0
+        },
+        "above_150": {
+            "min_runs": 20,
+            "Batter": 10,
+            "Keeper": 10,
+            "Allrounder": 10,
+            "Bowler": 10
+        },
+        "above_170": {
+            "min_runs": 20,
+            "Batter": 15,
+            "Keeper": 15,
+            "Allrounder": 15,
+            "Bowler": 15
+        },
+        "above_200": {
+            "min_runs": 20,
+            "Batter": 25,
+            "Keeper": 25,
+            "Allrounder": 25,
+            "Bowler": 25
+        },
+        "above_250": {
+            "min_runs": 20,
+            "Batter": 45,
+            "Keeper": 45,
+            "Allrounder": 45,
+            "Bowler": 45
+        },
+        "above_300": {
+            "min_runs": 20,
+            "Batter": 60,
+            "Keeper": 60,
+            "Allrounder": 60,
+            "Bowler": 60
+        }
+    },
+    "strike_rate_differential": {
+        "lower": {
+            "20_to_29.99": {
+                "min_balls": 15,
+                "Batter": -5,
+                "Keeper": -5,
+                "Allrounder": -5,
+                "Bowler": 0
+            },
+            "30_to_39.99": {
+                "min_balls": 15,
+                "Batter": -10,
+                "Keeper": -10,
+                "Allrounder": -10,
+                "Bowler": 0
+            },
+            "40_to_49.99": {
+                "min_balls": 12,
+                "Batter": -15,
+                "Keeper": -15,
+                "Allrounder": -15,
+                "Bowler": -5
+            },
+            "50_to_59.99": {
+                "min_balls": 10,
+                "Batter": -25,
+                "Keeper": -25,
+                "Allrounder": -25,
+                "Bowler": -10
+            },
+            "60_to_69.99": {
+                "min_balls": 10,
+                "Batter": -35,
+                "Keeper": -35,
+                "Allrounder": -35,
+                "Bowler": -15
+            },
+            "70_plus": {
+                "min_balls": 10,
+                "Batter": -50,
+                "Keeper": -50,
+                "Allrounder": -50,
+                "Bowler": -20
+            }
+        },
+        "higher": {
+            "20_to_29.99": {
+                "min_runs": 20,
+                "Batter": 5,
+                "Keeper": 5,
+                "Allrounder": 5,
+                "Bowler": 5
+            },
+            "30_to_49.99": {
+                "min_runs": 20,
+                "Batter": 10,
+                "Keeper": 10,
+                "Allrounder": 10,
+                "Bowler": 10
+            },
+            "50_to_74.99": {
+                "min_runs": 20,
+                "Batter": 15,
+                "Keeper": 15,
+                "Allrounder": 15,
+                "Bowler": 15
+            },
+            "75_to_99.99": {
+                "min_runs": 20,
+                "Batter": 25,
+                "Keeper": 25,
+                "Allrounder": 25,
+                "Bowler": 25
+            },
+            "100_to_199.99": {
+                "min_runs": 20,
+                "Batter": 35,
+                "Keeper": 35,
+                "Allrounder": 35,
+                "Bowler": 35
+            },
+            "200_plus": {
+                "min_runs": 20,
+                "Batter": 50,
+                "Keeper": 50,
+                "Allrounder": 50,
+                "Bowler": 50
+            }
+        }
+    },
+    "fielding": {
+        "catch_stumping_runout": {
+            "Batter": 10,
+            "Keeper": 10,
+            "Allrounder": 10,
+            "Bowler": 10
+        }
+    },
+    "economy_rate": {
+        "one_over": {
+            "above_18": {
+                "Batter": -15,
+                "Keeper": -15,
+                "Allrounder": -30,
+                "Bowler": -30
+            }
+        },
+        "one_to_two_overs": {
+            "15_to_17.99": {
+                "Batter": -5,
+                "Keeper": -5,
+                "Allrounder": -8,
+                "Bowler": -8
+            },
+            "13_to_14.99": {
+                "Batter": -4,
+                "Keeper": -4,
+                "Allrounder": -7,
+                "Bowler": -7
+            },
+            "12_to_12.99": {
+                "Batter": -3,
+                "Keeper": -3,
+                "Allrounder": -6,
+                "Bowler": -6
+            },
+            "11_to_11.99": {
+                "Batter": -1.5,
+                "Keeper": -1.5,
+                "Allrounder": -3,
+                "Bowler": -3
+            },
+            "7_to_7.99": {
+                "Batter": 9,
+                "Keeper": 9,
+                "Allrounder": 9,
+                "Bowler": 9
+            },
+            "6_to_6.99": {
+                "Batter": 18,
+                "Keeper": 18,
+                "Allrounder": 18,
+                "Bowler": 18
+            },
+            "5_to_5.99": {
+                "Batter": 26,
+                "Keeper": 26,
+                "Allrounder": 26,
+                "Bowler": 26
+            },
+            "4_to_4.99": {
+                "Batter": 35,
+                "Keeper": 35,
+                "Allrounder": 35,
+                "Bowler": 35
+            },
+            "3_to_3.99": {
+                "Batter": 45,
+                "Keeper": 45,
+                "Allrounder": 45,
+                "Bowler": 45
+            },
+            "2_to_2.99": {
+                "Batter": 54,
+                "Keeper": 54,
+                "Allrounder": 54,
+                "Bowler": 54
+            },
+            "below_2": {
+                "Batter": 63,
+                "Keeper": 63,
+                "Allrounder": 63,
+                "Bowler": 63
+            }
+        },
+        "min_2.1_overs": {
+            "15_to_17.99": {
+                "Batter": -13,
+                "Keeper": -13,
+                "Allrounder": -25,
+                "Bowler": -25
+            },
+            "13_to_14.99": {
+                "Batter": -8,
+                "Keeper": -8,
+                "Allrounder": -15,
+                "Bowler": -15
+            },
+            "12_to_12.99": {
+                "Batter": -10,
+                "Keeper": -10,
+                "Allrounder": -20,
+                "Bowler": -20
+            },
+            "11_to_11.99": {
+                "Batter": -5,
+                "Keeper": -5,
+                "Allrounder": -10,
+                "Bowler": -10
+            },
+            "7_to_7.99": {
+                "Batter": 30,
+                "Keeper": 30,
+                "Allrounder": 30,
+                "Bowler": 30
+            },
+            "6_to_6.99": {
+                "Batter": 60,
+                "Keeper": 60,
+                "Allrounder": 60,
+                "Bowler": 60
+            },
+            "5_to_5.99": {
+                "Batter": 85,
+                "Keeper": 85,
+                "Allrounder": 85,
+                "Bowler": 85
+            },
+            "4_to_4.99": {
+                "Batter": 115,
+                "Keeper": 115,
+                "Allrounder": 115,
+                "Bowler": 115
+            },
+            "3_to_3.99": {
+                "Batter": 150,
+                "Keeper": 150,
+                "Allrounder": 150,
+                "Bowler": 150
+            },
+            "2_to_2.99": {
+                "Batter": 180,
+                "Keeper": 180,
+                "Allrounder": 180,
+                "Bowler": 180
+            },
+            "below_2": {
+                "Batter": 210,
+                "Keeper": 210,
+                "Allrounder": 210,
+                "Bowler": 210
+            }
+        }
+    },
+    "economy_rate_differential": {
+        "higher": {
+            "20_to_29.99": {
+                "min_overs": 2.1,
+                "Batter": 0,
+                "Keeper": 0,
+                "Allrounder": -10,
+                "Bowler": -10
+            },
+            "30_to_39.99": {
+                "min_overs": 2.1,
+                "Batter": 0,
+                "Keeper": 0,
+                "Allrounder": -15,
+                "Bowler": -15
+            },
+            "40_to_49.99": {
+                "min_overs": 2.1,
+                "Batter": -10,
+                "Keeper": -10,
+                "Allrounder": -25,
+                "Bowler": -25
+            },
+            "50_to_59.99": {
+                "min_overs": 2.1,
+                "Batter": -15,
+                "Keeper": -15,
+                "Allrounder": -40,
+                "Bowler": -40
+            },
+            "60_to_69.99": {
+                "min_overs": 2.1,
+                "Batter": -25,
+                "Keeper": -25,
+                "Allrounder": -60,
+                "Bowler": -60
+            },
+            "70_plus": {
+                "min_overs": 2.1,
+                "Batter": -40,
+                "Keeper": -40,
+                "Allrounder": -80,
+                "Bowler": -80
+            }
+        },
+        "lower": {
+            "20_to_29.99": {
+                "min_overs": 2.1,
+                "Batter": 0,
+                "Keeper": 0,
+                "Allrounder": 10,
+                "Bowler": 10
+            },
+            "30_to_39.99": {
+                "min_overs": 2.1,
+                "Batter": 0,
+                "Keeper": 0,
+                "Allrounder": 15,
+                "Bowler": 15
+            },
+            "40_to_49.99": {
+                "min_overs": 2.1,
+                "Batter": 10,
+                "Keeper": 10,
+                "Allrounder": 25,
+                "Bowler": 25
+            },
+            "50_to_59.99": {
+                "min_overs": 2.1,
+                "Batter": 15,
+                "Keeper": 15,
+                "Allrounder": 40,
+                "Bowler": 40
+            },
+            "60_to_69.99": {
+                "min_overs": 2.1,
+                "Batter": 25,
+                "Keeper": 25,
+                "Allrounder": 60,
+                "Bowler": 60
+            },
+            "70_plus": {
+                "min_overs": 2.1,
+                "Batter": 40,
+                "Keeper": 40,
+                "Allrounder": 80,
+                "Bowler": 80
+            }
+        }
+    },
+    "wickets": {
+        "per_wicket": {
+            "Batter": 30,
+            "Keeper": 30,
+            "Allrounder": 20,
+            "Bowler": 20
+        },
+        "milestone_3": {
+            "Batter": 50,
+            "Keeper": 50,
+            "Allrounder": 30,
+            "Bowler": 30
+        },
+        "milestone_4": {
+            "Batter": 80,
+            "Keeper": 80,
+            "Allrounder": 50,
+            "Bowler": 50
+        },
+        "milestone_5": {
+            "Batter": 120,
+            "Keeper": 120,
+            "Allrounder": 80,
+            "Bowler": 80
+        },
+        "milestone_6_plus": {
+            "Batter": 160,
+            "Keeper": 160,
+            "Allrounder": 120,
+            "Bowler": 120
+        },
+        "hat_trick": {
+            "Batter": 30,
+            "Keeper": 30,
+            "Allrounder": 30,
+            "Bowler": 30
+        }
+    },
+    "bowling_other": {
+        "maiden_over": {
+            "Batter": 30,
+            "Keeper": 30,
+            "Allrounder": 30,
+            "Bowler": 30
+        },
+        "dot_ball": {
+            "Batter": 3,
+            "Keeper": 3,
+            "Allrounder": 1.5,
+            "Bowler": 1.5
+        },
+        "no_ball": {
+            "Batter": -1.5,
+            "Keeper": -1.5,
+            "Allrounder": -3,
+            "Bowler": -3
+        },
+        "wide": {
+            "Batter": -1,
+            "Keeper": -1,
+            "Allrounder": -2,
+            "Bowler": -2
+        }
+    },
+    "miscellaneous": {
+        "player_of_match": {
+            "Batter": 50,
+            "Keeper": 50,
+            "Allrounder": 50,
+            "Bowler": 50
+        }
+    }
+} 

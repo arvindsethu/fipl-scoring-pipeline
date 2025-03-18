@@ -1,0 +1,1144 @@
+{
+  "players": [
+    {
+      "name": "Ravindra Jadeja",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Ravichandran Ashwin",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Shivam Dube",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Sam Curran",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Jamie Overton",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Vijay Shankar",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Ramakrishna Ghosh",
+      "team": "Chennai Superkings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Ruturaj Gaikwad",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
+      "name": "Rachin Ravindra",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
+      "name": "Deepak Hooda",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
+      "name": "Rahul Tripathi",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
+      "name": "C Andre Siddarth",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
+      "name": "Shaik Rasheed",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
+      "name": "Matheesha Pathirana",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Noor Ahmad",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Nathan Ellis",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Shreyas Gopal",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Khaleel Ahmed",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Anshul Kamboj",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Gurjapneet Singh",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Kamlesh Nagarkoti",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mukesh Choudhary",
+      "team": "Chennai Superkings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Devon Conway",
+      "team": "Chennai Superkings",
+      "role": "Keeper"
+    },
+    {
+      "name": "MS Dhoni",
+      "team": "Chennai Superkings",
+      "role": "Keeper"
+    },
+    {
+      "name": "Vansh Bedi",
+      "team": "Chennai Superkings",
+      "role": "Keeper"
+    },
+    {
+      "name": "Axar Patel",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Ajay Mandal",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Donovan Ferreira",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Madhav Tiwari",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Manvanth Kumar",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Tripurana Vijay",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Vipraj Nigam",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Tristan Stubbs",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Faf du Plessis",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Harry Brook",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Jake Fraser-McGurk",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Ashutosh Sharma",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Karun Nair",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Sameer Rizvi",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
+      "name": "Kuldeep Yadav",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mitchell Starc",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "T Natarajan",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mohit Sharma",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mukesh Kumar",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Darshan Nalkande",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Dushmantha Chameera",
+      "team": "Delhi Capitals",
+      "role": "Bowler"
+    },
+    {
+      "name": "KL Rahul",
+      "team": "Delhi Capitals",
+      "role": "Keeper"
+    },
+    {
+      "name": "Abishek Porel",
+      "team": "Delhi Capitals",
+      "role": "Keeper"
+    },
+    {
+      "name": "Rashid Khan",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Washington Sundar",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Glenn Phillips",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Rahul Tewatia",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Shahrukh Khan",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Sherfane Rutherford",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Jayant Yadav",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Karim Janat",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Mahipal Lomror",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Nishant Sindhu",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Shubman Gill",
+      "team": "Gujarat Titans",
+      "role": "Batter"
+    },
+    {
+      "name": "Sai Sudharsan",
+      "team": "Gujarat Titans",
+      "role": "Batter"
+    },
+    {
+      "name": "Kagiso Rabada",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mohammad Siraj",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Prasidh Krishna",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Gerald Coetzee",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Sai Kishore",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Arshad Khan",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Gurnoor Brar",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Ishant Sharma",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Kulwant Khejroliya",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Manav Suthar",
+      "team": "Gujarat Titans",
+      "role": "Bowler"
+    },
+    {
+      "name": "Jos Buttler",
+      "team": "Gujarat Titans",
+      "role": "Keeper"
+    },
+    {
+      "name": "Anuj Rawat",
+      "team": "Gujarat Titans",
+      "role": "Keeper"
+    },
+    {
+      "name": "Kumar Kushagra",
+      "team": "Gujarat Titans",
+      "role": "Keeper"
+    },
+    {
+      "name": "Sunil Narine",
+      "team": "Kolkata Knight Riders",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Andre Russell",
+      "team": "Kolkata Knight Riders",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Moeen Ali",
+      "team": "Kolkata Knight Riders",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Rovman Powell",
+      "team": "Kolkata Knight Riders",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Anukul Roy",
+      "team": "Kolkata Knight Riders",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Rinku Singh",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Venkatesh Iyer",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Ajinkya Rahane",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Angkrish Raghuvanshi",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Manish Pandey",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Ramandeep Singh",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Luvnith Sisodia",
+      "team": "Kolkata Knight Riders",
+      "role": "Batter"
+    },
+    {
+      "name": "Varun Chakravarthy",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Anrich Nortje",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Harshit Rana",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mayank Markande",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Spencer Johnson",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Umran Malik",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Vaibhav Arora",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Quinton de Kock",
+      "team": "Kolkata Knight Riders",
+      "role": "Keeper"
+    },
+    {
+      "name": "Rahmanullah Gurbaz",
+      "team": "Kolkata Knight Riders",
+      "role": "Keeper"
+    },
+    {
+      "name": "Shahbaz Ahmed",
+      "team": "Lucknow Supergiants",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Abdul Samad",
+      "team": "Lucknow Supergiants",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Yuvraj Chaudhary",
+      "team": "Lucknow Supergiants",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Aiden Markram",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "Mitchell Marsh",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "Ayush Badoni",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "David Miller",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "Arshin Kulkarni",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "Himmat Singh",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "Matthew Breetzke",
+      "team": "Lucknow Supergiants",
+      "role": "Batter"
+    },
+    {
+      "name": "Avesh Khan",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Ravi Bishnoi",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Akash Deep",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mayank Yadav",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mohsin Khan",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Shamar Joseph",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Akash Singh",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Digvesh Rathi",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Manimaran Siddharth",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Prince Yadav",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Rajvardhan Hangargekar",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
+      "name": "Nicholas Pooran",
+      "team": "Lucknow Supergiants",
+      "role": "Keeper"
+    },
+    {
+      "name": "Rishabh Pant",
+      "team": "Lucknow Supergiants",
+      "role": "Keeper"
+    },
+    {
+      "name": "Aryan Juyal",
+      "team": "Lucknow Supergiants",
+      "role": "Keeper"
+    },
+    {
+      "name": "Hardik Pandya",
+      "team": "Mumbai Indians",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Naman Dhir",
+      "team": "Mumbai Indians",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Raj Bawa",
+      "team": "Mumbai Indians",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Suryakumar Yadav",
+      "team": "Mumbai Indians",
+      "role": "Batter"
+    },
+    {
+      "name": "Tilak Varma",
+      "team": "Mumbai Indians",
+      "role": "Batter"
+    },
+    {
+      "name": "Rohit Sharma",
+      "team": "Mumbai Indians",
+      "role": "Batter"
+    },
+    {
+      "name": "Ryan Rickelton",
+      "team": "Mumbai Indians",
+      "role": "Batter"
+    },
+    {
+      "name": "Will Jacks",
+      "team": "Mumbai Indians",
+      "role": "Batter"
+    },
+    {
+      "name": "Bevon Jacobs",
+      "team": "Mumbai Indians",
+      "role": "Batter"
+    },
+    {
+      "name": "Jasprit Bumrah",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Trent Boult",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Deepak Chahar",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mitchell Santner",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mujeeb Ur Rahman",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Reece Topley",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Arjun Tendulkar",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Ashwani Kumar",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Karn Sharma",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Lizaad Williams",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Satyanarayana Raju",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Krishnan Shrijith",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Vignesh Puthur",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Robin Minz",
+      "team": "Mumbai Indians",
+      "role": "Keeper"
+    },
+    {
+      "name": "Glenn Maxwell",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Marco Jansen",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Marcus Stoinis",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Azmatullah Omarzai",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Aaron Hardie",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Musheer Khan",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Praveen Dubey",
+      "team": "Punjab Kings",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Shreyas Iyer",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Shashank Singh",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Nehal Wadhera",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Harnoor Pannu",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Priyansh Arya",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Pyla Avinash",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Suryansh Shedge",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
+      "name": "Arshdeep Singh",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Yuzvendra Chahal",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Harpreet Brar",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Lockie Ferguson",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Kuldeep Sen",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Vijaykumar Vyshak",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Xavier Bartlett",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Yash Thakur",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Josh Inglis",
+      "team": "Punjab Kings",
+      "role": "Keeper"
+    },
+    {
+      "name": "Prabhsimran Singh",
+      "team": "Punjab Kings",
+      "role": "Keeper"
+    },
+    {
+      "name": "Vishnu Vinod",
+      "team": "Punjab Kings",
+      "role": "Keeper"
+    },
+    {
+      "name": "Riyan Parag",
+      "team": "Rajasthan Royals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Wanindu Hasaranga",
+      "team": "Rajasthan Royals",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Yashasvi Jaiswal",
+      "team": "Rajasthan Royals",
+      "role": "Batter"
+    },
+    {
+      "name": "Nitish Rana",
+      "team": "Rajasthan Royals",
+      "role": "Batter"
+    },
+    {
+      "name": "Shimron Hetmyer",
+      "team": "Rajasthan Royals",
+      "role": "Batter"
+    },
+    {
+      "name": "Kunal Singh Rathore",
+      "team": "Rajasthan Royals",
+      "role": "Batter"
+    },
+    {
+      "name": "Shubham Dubey",
+      "team": "Rajasthan Royals",
+      "role": "Batter"
+    },
+    {
+      "name": "Vaibhav Suryavanshi",
+      "team": "Rajasthan Royals",
+      "role": "Batter"
+    },
+    {
+      "name": "Jofra Archer",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mahesh Theekshana",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Sandeep Sharma",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Akash Madhwal",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Fazalhaq Farooqi",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Tushar Deshpande",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Ashok Sharma",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Kumar Kartikeya",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Kwena Maphaka",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Yudhvir Singh",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
+      "name": "Sanju Samson",
+      "team": "Rajasthan Royals",
+      "role": "Keeper"
+    },
+    {
+      "name": "Dhruv Jurel",
+      "team": "Rajasthan Royals",
+      "role": "Keeper"
+    },
+    {
+      "name": "Krunal Pandya",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Jacob Bethell",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Liam Livingstone",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Romario Shepherd",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Manoj Bhandage",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Virat Kohli",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Batter"
+    },
+    {
+      "name": "Rajat Patidar",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Batter"
+    },
+    {
+      "name": "Tim David",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Batter"
+    },
+    {
+      "name": "Devdutt Padikkal",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Batter"
+    },
+    {
+      "name": "Swastik Chikara",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Batter"
+    },
+    {
+      "name": "Josh Hazlewood",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Bhuvneshwar Kumar",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Nuwan Thushara",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Rasikh Salam",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Suyash Sharma",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Yash Dayal",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Abhinandan Singh",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Lungi Ngidi",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mohit Rathee",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Swapnil Singh",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Phil Salt",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Keeper"
+    },
+    {
+      "name": "Jitesh Sharma",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Keeper"
+    },
+    {
+      "name": "Abhishek Sharma",
+      "team": "Sunrisers Hyderabad",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Brydon Carse",
+      "team": "Sunrisers Hyderabad",
+      "role": "Allrounder"
+    },
+    {
+      "name": "Travis Head",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Nitish Kumar Reddy",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Kamindu Mendis",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Abhinav Manohar",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Aniket Verma",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Atharva Taide",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Sachin Baby",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Pat Cummins",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Mohammed Shami",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Adam Zampa",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Harshal Patel",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Rahul Chahar",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Eshan Malinga",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Jaydev Unadkat",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Simarjeet Singh",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Zeeshan Ansari",
+      "team": "Sunrisers Hyderabad",
+      "role": "Bowler"
+    },
+    {
+      "name": "Heinrich Klaasen",
+      "team": "Sunrisers Hyderabad",
+      "role": "Keeper"
+    },
+    {
+      "name": "Ishan Kishan",
+      "team": "Sunrisers Hyderabad",
+      "role": "Keeper"
+    }
+  ]
+}
