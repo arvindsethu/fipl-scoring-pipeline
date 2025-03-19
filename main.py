@@ -14,7 +14,7 @@ if not logger.handlers:
 logger.setLevel(logging.INFO)
 
 # Cloud Storage setup
-BUCKET_NAME = "your-bucket-name"  # Replace with your bucket name
+BUCKET_NAME = "fipl_bucket"  # Replace with your bucket name
 state_manager = StateManager(BUCKET_NAME)
 
 def get_update_frequency(match_start_time, current_time):
@@ -75,7 +75,10 @@ def update_scores(request):
         
         # Only run between 8 AM and 8 PM UTC
         if not (8 <= current_time.hour < 20):
-            return {'message': 'Outside operating hours'}, 200
+            return json.dumps({
+                'message': 'Outside operating hours',
+                'timestamp': current_time.isoformat()
+            }), 200, {'Content-Type': 'application/json'}
         
         try:
             # Load state from Cloud Storage
@@ -84,11 +87,17 @@ def update_scores(request):
             # Verify state integrity
             if not state_manager.verify_state_integrity(data):
                 logger.error("Invalid state data structure")
-                return {'error': 'Invalid state data structure'}, 500
+                return json.dumps({
+                    'error': 'Invalid state data structure',
+                    'timestamp': current_time.isoformat()
+                }), 500, {'Content-Type': 'application/json'}
                 
         except Exception as e:
             logger.error(f"Error loading state: {str(e)}")
-            return {'error': f'Failed to load state: {str(e)}'}, 500
+            return json.dumps({
+                'error': f'Failed to load state: {str(e)}',
+                'timestamp': current_time.isoformat()
+            }), 500, {'Content-Type': 'application/json'}
         
         matches_updated = False
         processed_matches = []
@@ -135,24 +144,30 @@ def update_scores(request):
                 state_manager.save_state(data)
             except Exception as e:
                 logger.error(f"Error saving state: {str(e)}")
-                return {'error': f'Failed to save state: {str(e)}'}, 500
+                return json.dumps({
+                    'error': f'Failed to save state: {str(e)}',
+                    'timestamp': current_time.isoformat()
+                }), 500, {'Content-Type': 'application/json'}
         
         if processed_matches or status_changes:
             logger.info(f"Processed matches: {processed_matches}, Status changes: {status_changes}")
         
-        return {
+        return json.dumps({
             'message': 'Success',
             'processed_matches': processed_matches,
             'matches_updated': matches_updated,
             'status_changes': status_changes,
             'skipped_matches': skipped_matches,
             'timestamp': current_time.isoformat()
-        }, 200
+        }), 200, {'Content-Type': 'application/json'}
         
     except Exception as e:
         error_msg = f"Error during score update: {str(e)}"
         logger.error(error_msg)
-        return {'error': error_msg}, 500
+        return json.dumps({
+            'error': error_msg,
+            'timestamp': datetime.now(pytz.UTC).isoformat()
+        }), 500, {'Content-Type': 'application/json'}
 
 if __name__ == "__main__":
     # For local testing

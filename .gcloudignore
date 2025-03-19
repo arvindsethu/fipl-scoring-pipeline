@@ -6,8 +6,13 @@ __pycache__/
 .pytest_cache/
 .vscode/
 *.log
-local_test/
 venv/
 env/
-README.md
-.idea/ 
+.idea/
+demo.log
+!config/
+!src/
+!requirements.txt
+!main.py
+!sheets_config.py
+README.md 

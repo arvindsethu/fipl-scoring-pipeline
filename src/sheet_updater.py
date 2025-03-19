@@ -94,7 +94,6 @@ def update_sheet_for_match(match_data):
     
     try:
         # Scrape match data
-        logger.info(f"Scraping match {match_data['match_number']}...")
         scorecard_data = scrape_scorecard(match_data['url'])
         
         # Save scorecard data to temp file
@@ -125,7 +124,7 @@ def update_sheet_for_match(match_data):
                     # Find player's row
                     row_num = find_player_row(sheet_service, player_name)
                     if row_num is None:
-                        logger.warning(f"Player not found: {player_name}")
+                        logger.warning(f"Warning: Player not found in sheet: {player_name}")
                         continue
                     
                     # Update "Played" column

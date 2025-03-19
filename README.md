@@ -1,6 +1,55 @@
 # Fantasy IPL Scoring Pipeline
 
-A cloud-based automated scoring system for fantasy cricket, specifically designed for the Indian Premier League (IPL). The system scrapes live match data, calculates fantasy points based on player performances, and updates scores in real-time to a Google Sheets dashboard.
+An automated scoring system for fantasy cricket, specifically designed for the Indian Premier League (IPL). This system automatically tracks live matches, calculates fantasy points, and updates scores in real-time to a Google Sheets dashboard.
+
+## What it does
+
+- **Live Match Tracking**: Automatically follows IPL matches as they happen
+- **Real-time Scoring**: Updates player points every 15-30 minutes during matches
+- **Comprehensive Scoring System**: 
+  - Batting points for runs, strike rates, and milestones
+  - Bowling points for wickets, economy rates, and dot balls
+  - Fielding points for catches, run-outs, and stumpings
+  - Special bonuses for Player of the Match
+
+## How it works
+
+The system runs automatically during match hours (9:30 AM to 8:00 PM UTC) and:
+1. Tracks live match progress
+2. Calculates points based on player performances
+3. Updates scores to a Google Sheets dashboard
+4. Handles multiple matches simultaneously
+
+## Technologies Used
+
+- **Google Cloud Platform**: For reliable automated execution
+- **Google Sheets**: For displaying live scores and statistics
+- **Python**: For data processing and calculations
+- **ESPNCricinfo**: For live match data
+
+## Scoring System Highlights
+
+### Batting Points
+- 1 point per run
+- Bonus points for high strike rates
+- Extra points for reaching milestones (30s, 50s, 100s)
+- Boundary bonuses for fours and sixes
+
+### Bowling Points
+- Points for each wicket
+- Economy rate bonuses
+- Maiden over rewards
+- Dot ball points
+
+### Fielding Points
+- Points for catches
+- Points for stumpings
+- Points for run-outs
+
+### Special Awards
+- Bonus points for Player of the Match
+
+The system is designed to be fully automated, requiring no manual intervention during matches. All scores and statistics are automatically calculated and updated to provide a seamless fantasy cricket experience.
 
 ## System Architecture
 
