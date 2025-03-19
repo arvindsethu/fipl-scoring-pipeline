@@ -1,6 +1,10 @@
 import os
 import json
+import logging
 from typing import Dict, Any
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # Constants for Cloud Function environment
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
