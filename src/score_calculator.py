@@ -1,15 +1,32 @@
+import os
 import json
 from typing import Dict, Any
 
-# Load scoring rules
-with open('config/scoring_rules.json', 'r', encoding='utf-8') as f:
-    scoring_rules = json.load(f)
+# Constants for Cloud Function environment
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CONFIG_DIR = os.path.join(BASE_DIR, 'config')
+TMP_DIR = '/tmp'
 
-# Load player roles
-with open('config/players.json', 'r', encoding='utf-8') as f:
-    players_data = json.load(f)
-    # Create a dictionary for quick player role lookup
-    player_roles = {player['name']: player['role'] for player in players_data['players']}
+def load_config_files():
+    """Load configuration files with proper error handling"""
+    try:
+        # Load scoring rules
+        with open(os.path.join(CONFIG_DIR, 'scoring_rules.json'), 'r', encoding='utf-8') as f:
+            scoring_rules = json.load(f)
+
+        # Load player roles
+        with open(os.path.join(CONFIG_DIR, 'players.json'), 'r', encoding='utf-8') as f:
+            players_data = json.load(f)
+            player_roles = {player['name']: player['role'] for player in players_data['players']}
+            
+        return scoring_rules, player_roles
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"Configuration file not found: {str(e)}")
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in configuration file: {str(e)}")
+
+# Load configuration files
+scoring_rules, player_roles = load_config_files()
 
 # Function to calculate batting points
 def calculate_batting_points(stats: Dict[str, Any], player_name: str) -> tuple[float, float, float, float]:
@@ -252,72 +269,51 @@ def calculate_potm_points(stats: Dict[str, Any], player_name: str) -> float:
 
     return scoring_rules['miscellaneous']['player_of_match'][player_role] if stats['potm'] == 'Yes' else 0
 
-def calculate_scores_and_update_sheet():
-    # Load player statistics from scorecard.json
-    with open('output/scorecard.json', 'r', encoding='utf-8') as f:
-        scorecard_data = json.load(f)
-
-    # Calculate points for each player
-    for team_name, team_data in scorecard_data.items():
-        if 'player_stats' in team_data:
+def calculate_scores_and_update_sheet(scorecard_path):
+    """Calculate scores for all players in a match"""
+    try:
+        # Load scorecard data
+        with open(scorecard_path, 'r', encoding='utf-8') as f:
+            scorecard_data = json.load(f)
+        
+        # Process each team
+        for team_name, team_data in scorecard_data.items():
+            if 'player_stats' not in team_data:
+                continue
+                
             for player_name, stats in team_data['player_stats'].items():
-                # Calculate batting points breakdown
-                runs_points = 0
-                strike_rate_points = 0
-                boundaries_points = 0
+                # Calculate batting points
+                batting_points, runs_points, sr_points, boundaries_points = calculate_batting_points(stats, player_name)
                 
-                # Calculate batting points with detailed breakdown
-                batting_stats = calculate_batting_points(stats, player_name)
-                if isinstance(batting_stats, tuple):
-                    batting_points, runs_points, strike_rate_points, boundaries_points = batting_stats
-                else:
-                    batting_points = batting_stats
-                
-                # Calculate bowling points breakdown
-                wickets_points = 0
-                maiden_points = 0
-                economy_points = 0
-                extras_points = 0
-                dots_points = 0
-                
-                # Calculate bowling points with detailed breakdown
-                bowling_stats = calculate_bowling_points(stats, player_name)
-                if isinstance(bowling_stats, tuple):
-                    bowling_points, wickets_points, maiden_points, economy_points, extras_points, dots_points = bowling_stats
-                else:
-                    bowling_points = bowling_stats
+                # Calculate bowling points
+                bowling_points, wickets_points, maiden_points, economy_points, extras_points, dots_points = calculate_bowling_points(stats, player_name)
                 
                 # Calculate fielding points
                 fielding_points = calculate_fielding_points(stats, player_name)
-                potm_points = calculate_potm_points(stats, player_name)
                 
-                # Store all point categories - convert to int if it ends in .0
-                def format_points(points):
-                    return int(points) if float(points).is_integer() else float(points)
-                
-                # Update all point categories
-                stats['runs_points'] = format_points(runs_points)
-                stats['strike_rate_points'] = format_points(strike_rate_points)
-                stats['boundaries_points'] = format_points(boundaries_points)
-                stats['maiden_points'] = format_points(maiden_points)
-                stats['potm_points'] = format_points(potm_points)
-                stats['wickets_points'] = format_points(wickets_points)
-                stats['dots_points'] = format_points(dots_points)
-                stats['extras_points'] = format_points(extras_points)
-                stats['economy_points'] = format_points(economy_points)
-                stats['batting_points'] = format_points(batting_points)
-                stats['bowling_points'] = format_points(bowling_points)
-                stats['fielding_points'] = format_points(fielding_points)
-                
-                # Calculate total points as sum of all categories
-                total = batting_points + bowling_points + fielding_points + potm_points
-                stats['total_points'] = format_points(total)
-
-    # Save the updated scorecard back to the file
-    with open('output/scorecard.json', 'w', encoding='utf-8') as f:
-        json.dump(scorecard_data, f, indent=4)
-
-    print("Player scores calculated and saved to scorecard.json")
+                # Update stats with points
+                stats.update({
+                    'batting_points': round(batting_points, 2),
+                    'runs_points': round(runs_points, 2),
+                    'strike_rate_points': round(sr_points, 2),
+                    'boundaries_points': round(boundaries_points, 2),
+                    'bowling_points': round(bowling_points, 2),
+                    'wickets_points': round(wickets_points, 2),
+                    'maiden_points': round(maiden_points, 2),
+                    'economy_points': round(economy_points, 2),
+                    'extras_points': round(extras_points, 2),
+                    'dots_points': round(dots_points, 2),
+                    'fielding_points': round(fielding_points, 2),
+                    'total_points': round(batting_points + bowling_points + fielding_points, 2)
+                })
+        
+        # Save updated scorecard
+        with open(scorecard_path, 'w', encoding='utf-8') as f:
+            json.dump(scorecard_data, f, indent=4)
+            
+    except Exception as e:
+        logger.error(f"Error calculating scores: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     calculate_scores_and_update_sheet()

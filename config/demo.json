@@ -1,52 +1,52 @@
 {
-    "matches": [
-      {
-        "match_number": 1,
-        "start_time": "2024-03-18T14:00:00Z",
-        "status": "pending",
-        "last_update": null,
-        "url": "https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/lucknow-super-giants-vs-rajasthan-royals-44th-match-1426282/full-scorecard",
-        "gameweek": 1,
-        "teams": {
-          "Lucknow Super Giants": {
-            "gameweek_match": 1
-          },
-          "Rajasthan Royals": {
-            "gameweek_match": 2
-          }
-        }
-      },
-      {
-        "match_number": 2,
-        "start_time": "2024-03-18T10:00:00Z",
-        "status": "pending",
-        "last_update": null,
-        "url": "https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/kolkata-knight-riders-vs-sunrisers-hyderabad-final-1426312/full-scorecard",
-        "gameweek": 2,
-        "teams": {
-          "Sunrisers Hyderabad": {
-            "gameweek_match": 1
-          },
-          "Kolkata Knight Riders": {
-            "gameweek_match": 1
-          }
-        }
-      },
-      {
-        "match_number": 3,
-        "start_time": "2024-03-18T14:00:00Z",
-        "status": "pending",
-        "last_update": null,
-        "url": "https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/gujarat-titans-vs-delhi-capitals-32nd-match-1426270/full-scorecard",
-        "gameweek": 3,
-        "teams": {
-          "Gujarat Titans": {
-            "gameweek_match": 2
-          },
-          "Delhi Capitals": {
-            "gameweek_match": 1
-          }
+  "matches": [
+    {
+      "match_number": 1,
+      "start_time": "2024-03-18T18:00:00Z",
+      "status": "in_progress",
+      "last_update": "2025-03-18T16:05:38.748545+00:00",
+      "url": "https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/lucknow-super-giants-vs-rajasthan-royals-44th-match-1426282/full-scorecard",
+      "gameweek": 1,
+      "teams": {
+        "Lucknow Super Giants": {
+          "gameweek_match": 1
+        },
+        "Rajasthan Royals": {
+          "gameweek_match": 2
         }
       }
-    ]
-  }
+    },
+    {
+      "match_number": 2,
+      "start_time": "2024-03-18T18:35:00Z",
+      "status": "pending",
+      "last_update": null,
+      "url": "https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/kolkata-knight-riders-vs-sunrisers-hyderabad-final-1426312/full-scorecard",
+      "gameweek": 2,
+      "teams": {
+        "Sunrisers Hyderabad": {
+          "gameweek_match": 1
+        },
+        "Kolkata Knight Riders": {
+          "gameweek_match": 1
+        }
+      }
+    },
+    {
+      "match_number": 3,
+      "start_time": "2024-03-18T18:55:00Z",
+      "status": "pending",
+      "last_update": null,
+      "url": "https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/gujarat-titans-vs-delhi-capitals-32nd-match-1426270/full-scorecard",
+      "gameweek": 3,
+      "teams": {
+        "Gujarat Titans": {
+          "gameweek_match": 2
+        },
+        "Delhi Capitals": {
+          "gameweek_match": 1
+        }
+      }
+    }
+  ]
+}
