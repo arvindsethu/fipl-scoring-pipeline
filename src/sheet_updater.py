@@ -90,6 +90,7 @@ def update_sheet_for_match(match_data):
     # Initialize Google Sheets
     sheet_service = get_sheet_service()
     sheet_mappings, field_mappings = load_config()
+    updated_players = []  # Track updated players
     
     try:
         # Scrape match data
@@ -98,15 +99,13 @@ def update_sheet_for_match(match_data):
         
         # Save scorecard data to temp file
         scorecard_path = os.path.join(TMP_DIR, f"scorecard_{match_data['match_number']}.json")
-        logger.info(f"Saving scorecard data to: {scorecard_path}")
         os.makedirs(TMP_DIR, exist_ok=True)  # Ensure temp directory exists
         
         with open(scorecard_path, 'w', encoding='utf-8') as f:
             json.dump(scorecard_data, f, indent=4)
         
         # Calculate points
-        logger.info("Calculating points...")
-        calculate_scores_and_update_sheet(scorecard_path)  # Pass the scorecard path
+        calculate_scores_and_update_sheet(scorecard_path)
         
         # Read the updated scorecard with points
         with open(scorecard_path, 'r', encoding='utf-8') as f:
@@ -119,8 +118,6 @@ def update_sheet_for_match(match_data):
             
             # Get column ranges
             columns = get_column_range(sheet_mappings, gameweek, match_num)
-            logger.info(f"\nProcessing {team_name} (Gameweek {gameweek}, Match {match_num})")
-            logger.info(f"Columns: {columns['played']} (Played), {columns['start']}-{columns['end']} (Stats)")
             
             # Process each player
             if team_name in scorecard_data:
@@ -128,7 +125,7 @@ def update_sheet_for_match(match_data):
                     # Find player's row
                     row_num = find_player_row(sheet_service, player_name)
                     if row_num is None:
-                        logger.info(f"Player not found: {player_name}")
+                        logger.warning(f"Player not found: {player_name}")
                         continue
                     
                     # Update "Played" column
@@ -154,7 +151,11 @@ def update_sheet_for_match(match_data):
                         body={'values': [ordered_stats]}
                     ).execute()
                     
-                    logger.info(f"Updated {player_name} in row {row_num}")
+                    updated_players.append(player_name)
+        
+        # Log summary of updates
+        if updated_players:
+            logger.info(f"Updated {len(updated_players)} players in sheet")
         
         # Clean up temp file
         try:
@@ -175,7 +176,6 @@ def main():
     try:
         # Load matches
         matches_file = os.path.join(CONFIG_DIR, 'demo.json')
-        logger.info(f"Loading matches from: {matches_file}")
         with open(matches_file, 'r') as f:
             data = json.load(f)
         
@@ -192,8 +192,6 @@ def main():
                         match = update_match_status(match, new_status)
                 except Exception as e:
                     logger.error(f"Error processing match {match['match_number']}: {str(e)}")
-            else:
-                logger.info(f"\nSkipping match {match['match_number']} (status: {match['status']})")
         
         # Save updated match states back to config directory
         save_matches_state(data)

@@ -1,6 +1,7 @@
 # Credentials
 service-account.json
 sheets_config.py
+demo.json
 
 # Python
 __pycache__/

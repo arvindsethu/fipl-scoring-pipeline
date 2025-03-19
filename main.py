@@ -92,7 +92,8 @@ def update_scores(request):
         
         matches_updated = False
         processed_matches = []
-        status_changes = []  # Track status changes for logging
+        status_changes = []
+        skipped_matches = {"completed": [], "pending": []}  # Track skipped matches by status
         
         # Process each match
         for match in data['matches']:
@@ -121,7 +122,15 @@ def update_scores(request):
                 except Exception as e:
                     logger.error(f"Error updating match {match_num}: {str(e)}")
             else:
-                logger.info(f"Skipping match {match_num} (status: {new_status})")
+                # Track skipped matches by their status
+                if new_status in ["completed", "pending"]:
+                    skipped_matches[new_status].append(match_num)
+        
+        # Log skipped matches grouped by status
+        for status, matches in skipped_matches.items():
+            if matches:
+                matches_str = ", ".join(str(m) for m in sorted(matches))
+                logger.info(f"Skipping {status} matches: {matches_str}")
         
         # Save updated match states if any changes were made
         if matches_updated:
@@ -140,6 +149,7 @@ def update_scores(request):
             'processed_matches': processed_matches,
             'matches_updated': matches_updated,
             'status_changes': status_changes,
+            'skipped_matches': skipped_matches,
             'timestamp': current_time.isoformat()
         }, 200
         
