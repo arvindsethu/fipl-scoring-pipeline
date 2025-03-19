@@ -5,12 +5,17 @@ import json
 import os
 import functions_framework
 from src.sheet_updater import main as update_main
+from src.state_manager import StateManager
 
 # Setup logging for Cloud Functions
 logger = logging.getLogger()
 if not logger.handlers:
     logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.INFO)
+
+# Cloud Storage setup
+BUCKET_NAME = "your-bucket-name"  # Replace with your bucket name
+state_manager = StateManager(BUCKET_NAME)
 
 def get_update_frequency(match_start_time, current_time):
     """Determine update frequency based on match phase"""
@@ -47,21 +52,19 @@ def should_process_match(match, current_time):
         # Handle in-progress state
         last_update = None
         last_update_str = match.get('last_update')
-        if last_update_str and last_update_str != "null":  # Handle both None and "null" string
+        if last_update_str and last_update_str != "null":
             try:
                 last_update = datetime.fromisoformat(last_update_str.replace('Z', '+00:00'))
-            except ValueError as e:
-                logger.warning(f"Invalid last_update format: {last_update_str}")
+            except ValueError:
                 last_update = None
         
         # If no previous update or enough time has passed since last update
         if not last_update or (current_time - last_update).total_seconds() >= (frequency * 60):
             return True, frequency, "in_progress"
         
-        # Return current state without processing
         return False, frequency, "in_progress"
     except Exception as e:
-        logger.error(f"Error in should_process_match: {str(e)}")
+        logger.error(f"Error processing match {match.get('match_number', 'Unknown')}: {str(e)}")
         return False, None, match.get('status', 'pending')
 
 @functions_framework.http
@@ -69,31 +72,28 @@ def update_scores(request):
     """Cloud Function entry point"""
     try:
         current_time = datetime.now(pytz.UTC)
-        logger.info(f"Function triggered at {current_time.isoformat()}")
         
         # Only run between 8 AM and 8 PM UTC
         if not (8 <= current_time.hour < 20):
-            logger.info("Outside of operating hours (8 AM - 8 PM UTC)")
             return {'message': 'Outside operating hours'}, 200
         
-        logger.info("Starting score update process...")
-        
-        # Load matches
-        config_dir = os.path.join(os.path.dirname(__file__), 'config')
-        matches_file = os.path.join(config_dir, 'demo.json')
-        
-        if not os.path.exists(matches_file):
-            error_msg = f"Matches file not found: {matches_file}"
-            logger.error(error_msg)
-            return {'error': error_msg}, 500
-        
-        with open(matches_file, 'r') as f:
-            data = json.load(f)
+        try:
+            # Load state from Cloud Storage
+            data = state_manager.load_state()
+            
+            # Verify state integrity
+            if not state_manager.verify_state_integrity(data):
+                logger.error("Invalid state data structure")
+                return {'error': 'Invalid state data structure'}, 500
+                
+        except Exception as e:
+            logger.error(f"Error loading state: {str(e)}")
+            return {'error': f'Failed to load state: {str(e)}'}, 500
         
         matches_updated = False
         processed_matches = []
         status_changes = []
-        skipped_matches = {"completed": [], "pending": []}  # Track skipped matches by status
+        skipped_matches = {"completed": [], "pending": []}
         
         # Process each match
         for match in data['matches']:
@@ -101,7 +101,6 @@ def update_scores(request):
             old_status = match.get('status', 'pending')
             should_update, frequency, new_status = should_process_match(match, current_time)
             
-            # Log status transition if changed
             if old_status != new_status:
                 status_changes.append({
                     'match': match_num,
@@ -113,36 +112,33 @@ def update_scores(request):
                 matches_updated = True
             
             if should_update:
-                logger.info(f"Processing match {match_num} (updating every {frequency} minutes)")
                 try:
-                    update_main()
-                    match['last_update'] = current_time.isoformat()
-                    matches_updated = True
-                    processed_matches.append(match_num)
+                    # Pass the specific match to update_main
+                    updated_match = update_main(match)
+                    if updated_match:
+                        match.update(updated_match)
+                        match['last_update'] = current_time.isoformat()
+                        matches_updated = True
+                        processed_matches.append(match_num)
                 except Exception as e:
-                    logger.error(f"Error updating match {match_num}: {str(e)}")
+                    if "RATE_LIMIT_EXCEEDED" in str(e):
+                        logger.warning(f"Rate limit exceeded for match {match_num}, will retry in next run")
+                    else:
+                        logger.error(f"Error updating match {match_num}: {str(e)}")
             else:
-                # Track skipped matches by their status
                 if new_status in ["completed", "pending"]:
                     skipped_matches[new_status].append(match_num)
-        
-        # Log skipped matches grouped by status
-        for status, matches in skipped_matches.items():
-            if matches:
-                matches_str = ", ".join(str(m) for m in sorted(matches))
-                logger.info(f"Skipping {status} matches: {matches_str}")
         
         # Save updated match states if any changes were made
         if matches_updated:
             try:
-                with open(matches_file, 'w') as f:
-                    json.dump(data, f, indent=2)
-                logger.info("Updated match states saved")
-                if status_changes:
-                    logger.info("Status changes: " + json.dumps(status_changes, indent=2))
+                state_manager.save_state(data)
             except Exception as e:
-                logger.error(f"Error saving match states: {str(e)}")
-                return {'error': f'Failed to save match states: {str(e)}'}, 500
+                logger.error(f"Error saving state: {str(e)}")
+                return {'error': f'Failed to save state: {str(e)}'}, 500
+        
+        if processed_matches or status_changes:
+            logger.info(f"Processed matches: {processed_matches}, Status changes: {status_changes}")
         
         return {
             'message': 'Success',

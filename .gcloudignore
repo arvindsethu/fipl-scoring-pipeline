@@ -3,9 +3,11 @@
 .env
 __pycache__/
 *.pyc
-test_*
+.pytest_cache/
+.vscode/
+*.log
+local_test/
 venv/
 env/
-.vscode/
 README.md
 .idea/ 

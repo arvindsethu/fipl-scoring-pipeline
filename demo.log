@@ -1,0 +1,150 @@
+2025-03-19 11:55:05.751 GMT
+Function triggered at 2025-03-19T11:55:05.751622+00:00
+2025-03-19 11:55:05.751 GMT
+Starting score update process...
+2025-03-19 11:55:05.752 GMT
+Processing match 1 (updating every 15 minutes)
+2025-03-19 11:55:05.752 GMT
+Starting match updates at 2025-03-19T11:55:05.753188+00:00Z
+2025-03-19 11:55:05.752 GMT
+Processing match 1 (pending -> in_progress)
+2025-03-19 11:55:05.760 GMT
+file_cache is only supported with oauth2client<4.0.0
+2025-03-19 11:55:06.083 GMT
+Scraping match 1...
+2025-03-19 11:55:06.084 GMT
+Fetching scorecard from: https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/lucknow-super-giants-vs-rajasthan-royals-44th-match-1426282/full-scorecard
+2025-03-19 11:55:06.236 GMT
+Teams found: ['Lucknow Super Giants', 'Rajasthan Royals']
+2025-03-19 11:55:06.236 GMT
+Processing innings 1
+2025-03-19 11:55:06.257 GMT
+Updated Lucknow Super Giants avg SR: 163.33
+2025-03-19 11:55:06.257 GMT
+Updated Rajasthan Royals avg economy: 9.80
+2025-03-19 11:55:06.259 GMT
+Batting players found: 7
+2025-03-19 11:55:06.262 GMT
+Processing innings 2
+2025-03-19 11:55:06.282 GMT
+Updated Rajasthan Royals avg SR: 174.50
+2025-03-19 11:55:06.282 GMT
+Updated Lucknow Super Giants avg economy: 10.47
+2025-03-19 11:55:06.283 GMT
+Batting players found: 5
+2025-03-19 11:55:06.291 GMT
+Warning: Role not found for player Matt Henry
+2025-03-19 11:55:06.291 GMT
+Warning: Role not found for player Amit Mishra
+2025-03-19 11:55:15.835 GMT
+Player not found: Matt Henry
+2025-03-19 11:55:20.018 GMT
+Player not found: Amit Mishra
+2025-03-19 11:55:32.264 GMT
+Updated 22 players in sheet
+2025-03-19 11:55:32.264 GMT
+Cleaned up temporary file: /tmp/scorecard_1.json
+2025-03-19 11:55:32.264 GMT
+Processing match 2 (pending -> in_progress)
+2025-03-19 11:55:32.266 GMT
+file_cache is only supported with oauth2client<4.0.0
+2025-03-19 11:55:32.463 GMT
+Scraping match 2...
+2025-03-19 11:55:32.463 GMT
+Fetching scorecard from: https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/kolkata-knight-riders-vs-sunrisers-hyderabad-final-1426312/full-scorecard
+2025-03-19 11:55:32.606 GMT
+Teams found: ['Sunrisers Hyderabad', 'Kolkata Knight Riders']
+2025-03-19 11:55:32.606 GMT
+Processing innings 1
+2025-03-19 11:55:32.639 GMT
+Updated Sunrisers Hyderabad avg SR: 101.67
+2025-03-19 11:55:32.639 GMT
+Updated Kolkata Knight Riders avg economy: 6.10
+2025-03-19 11:55:32.642 GMT
+Batting players found: 11
+2025-03-19 11:55:32.645 GMT
+Processing innings 2
+2025-03-19 11:55:32.707 GMT
+Updated Kolkata Knight Riders avg SR: 180.83
+2025-03-19 11:55:32.707 GMT
+Updated Sunrisers Hyderabad avg economy: 10.85
+2025-03-19 11:55:32.708 GMT
+Batting players found: 4
+2025-03-19 11:55:48.304 GMT
+Error updating match 2: <HttpError 429 when requesting https://sheets.googleapis.com/v4/spreadsheets/1FyMVIeH9MXFG5HLvIZVwJ32gQeUcm_ZD8KBWbXNYo4s/values/BR44?valueInputOption=RAW&alt=json returned "Quota exceeded for quota metric 'Write requests' and limit 'Write requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:239406895284'.". Details: "[{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'RATE_LIMIT_EXCEEDED', 'domain': 'googleapis.com', 'metadata': {'quota_limit': 'WriteRequestsPerMinutePerUser', 'quota_limit_value': '60', 'quota_metric': 'sheets.googleapis.com/write_requests', 'quota_location': 'global', 'service': 'sheets.googleapis.com', 'consumer': 'projects/239406895284'}}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Request a higher quota limit.', 'url': 'https://cloud.google.com/docs/quotas/help/request_increase'}]}]">
+2025-03-19 11:55:48.305 GMT
+Completed updates at 2025-03-19T11:55:48.305822+00:00Z
+025-03-19 11:55:48.305 GMT
+Processing match 2 (updating every 15 minutes)
+2025-03-19 11:55:48.305 GMT
+Starting match updates at 2025-03-19T11:55:48.306277+00:00Z
+2025-03-19 11:55:48.305 GMT
+Processing match 1 (in_progress -> in_progress)
+2025-03-19 11:55:48.308 GMT
+file_cache is only supported with oauth2client<4.0.0
+2025-03-19 11:55:48.461 GMT
+Scraping match 1...
+2025-03-19 11:55:48.462 GMT
+Fetching scorecard from: https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/lucknow-super-giants-vs-rajasthan-royals-44th-match-1426282/full-scorecard
+2025-03-19 11:55:48.595 GMT
+Teams found: ['Lucknow Super Giants', 'Rajasthan Royals']
+2025-03-19 11:55:48.595 GMT
+Processing innings 1
+2025-03-19 11:55:48.616 GMT
+Updated Lucknow Super Giants avg SR: 163.33
+2025-03-19 11:55:48.616 GMT
+Updated Rajasthan Royals avg economy: 9.80
+2025-03-19 11:55:48.618 GMT
+Batting players found: 7
+2025-03-19 11:55:48.620 GMT
+Processing innings 2
+2025-03-19 11:55:48.640 GMT
+Updated Rajasthan Royals avg SR: 174.50
+2025-03-19 11:55:48.641 GMT
+Updated Lucknow Super Giants avg economy: 10.47
+025-03-19 11:55:48.642 GMT
+Batting players found: 5
+2025-03-19 11:55:48.649 GMT
+Warning: Role not found for player Matt Henry
+2025-03-19 11:55:48.650 GMT
+Warning: Role not found for player Amit Mishra
+2025-03-19 11:55:49.586 GMT
+Error updating match 1: <HttpError 429 when requesting https://sheets.googleapis.com/v4/spreadsheets/1FyMVIeH9MXFG5HLvIZVwJ32gQeUcm_ZD8KBWbXNYo4s/values/D96?valueInputOption=RAW&alt=json returned "Quota exceeded for quota metric 'Write requests' and limit 'Write requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:239406895284'.". Details: "[{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'RATE_LIMIT_EXCEEDED', 'domain': 'googleapis.com', 'metadata': {'quota_limit': 'WriteRequestsPerMinutePerUser', 'service': 'sheets.googleapis.com', 'quota_metric': 'sheets.googleapis.com/write_requests', 'consumer': 'projects/239406895284', 'quota_location': 'global', 'quota_limit_value': '60'}}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Request a higher quota limit.', 'url': 'https://cloud.google.com/docs/quotas/help/request_increase'}]}]">
+2025-03-19 11:55:49.586 GMT
+Processing match 2 (pending -> in_progress)
+2025-03-19 11:55:49.588 GMT
+file_cache is only supported with oauth2client<4.0.0
+2025-03-19 11:55:49.767 GMT
+Scraping match 2...
+2025-03-19 11:55:49.767 GMT
+Fetching scorecard from: https://www.espncricinfo.com/series/indian-premier-league-2024-1410320/kolkata-knight-riders-vs-sunrisers-hyderabad-final-1426312/full-scorecard
+2025-03-19 11:55:49.904 GMT
+Teams found: ['Sunrisers Hyderabad', 'Kolkata Knight Riders']
+2025-03-19 11:55:49.904 GMT
+Processing innings 1
+2025-03-19 11:55:49.937 GMT
+Updated Sunrisers Hyderabad avg SR: 101.67
+2025-03-19 11:55:49.937 GMT
+Updated Kolkata Knight Riders avg economy: 6.10
+2025-03-19 11:55:49.940 GMT
+Batting players found: 11
+025-03-19 11:55:49.943 GMT
+Processing innings 2
+2025-03-19 11:55:49.962 GMT
+Updated Kolkata Knight Riders avg SR: 180.83
+2025-03-19 11:55:49.962 GMT
+Updated Sunrisers Hyderabad avg economy: 10.85
+2025-03-19 11:55:49.964 GMT
+Batting players found: 4
+2025-03-19 11:55:50.987 GMT
+Error updating match 2: <HttpError 429 when requesting https://sheets.googleapis.com/v4/spreadsheets/1FyMVIeH9MXFG5HLvIZVwJ32gQeUcm_ZD8KBWbXNYo4s/values/BR212?valueInputOption=RAW&alt=json returned "Quota exceeded for quota metric 'Write requests' and limit 'Write requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:239406895284'.". Details: "[{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'RATE_LIMIT_EXCEEDED', 'domain': 'googleapis.com', 'metadata': {'service': 'sheets.googleapis.com', 'quota_location': 'global', 'consumer': 'projects/239406895284', 'quota_limit_value': '60', 'quota_limit': 'WriteRequestsPerMinutePerUser', 'quota_metric': 'sheets.googleapis.com/write_requests'}}, {'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Request a higher quota limit.', 'url': 'https://cloud.google.com/docs/quotas/help/request_increase'}]}]">
+2025-03-19 11:55:50.988 GMT
+Completed updates at 2025-03-19T11:55:50.989225+00:00Z
+2025-03-19 11:55:50.988 GMT
+Skipping pending matches: 3
+2025-03-19 11:55:50.988 GMT
+Updated match states saved
+2025-03-19 11:55:50.989 GMT
+Status changes: [ { "match": 1, "from": "pending", "to": "in_progress", "time": "2025-03-19T11:55:05.751622+00:00" }, { "match": 2, "from": "pending", "to": "in_progress", "time": "2025-03-19T11:55:05.751622+00:00" } ]
+2025-03-19 12:00:01.026 GMT
+GET200307 B3 msGoogle-Cloud-Scheduler https://europe-west2-scorecard-scraper.cloudfunctions.net/fipl-scoring-pipeline

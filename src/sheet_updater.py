@@ -169,33 +169,43 @@ def update_sheet_for_match(match_data):
         logger.error(f"Error updating match {match_data['match_number']}: {str(e)}")
         return False
 
-def main():
-    """Main function to process matches"""
+def main(match_data=None):
+    """Main function to process a specific match or all matches"""
     logger.info(f"Starting match updates at {datetime.now(pytz.UTC).isoformat()}Z")
     
     try:
-        # Load matches
-        matches_file = os.path.join(CONFIG_DIR, 'demo.json')
-        with open(matches_file, 'r') as f:
-            data = json.load(f)
-        
-        # Process each match
-        for match in data['matches']:
-            should_update, new_status = should_update_match(match)
-            
+        if match_data:
+            # Process single match
+            should_update, new_status = should_update_match(match_data)
             if should_update:
-                logger.info(f"\nProcessing match {match['match_number']} ({match['status']} -> {new_status})")
+                logger.info(f"Processing match {match_data['match_number']} ({match_data['status']} -> {new_status})")
                 try:
-                    # Update sheet for this match
-                    if update_sheet_for_match(match):
-                        # Only update status if sheet update was successful
-                        match = update_match_status(match, new_status)
+                    if update_sheet_for_match(match_data):
+                        match_data = update_match_status(match_data, new_status)
+                        return match_data
                 except Exception as e:
-                    logger.error(f"Error processing match {match['match_number']}: {str(e)}")
-        
-        # Save updated match states back to config directory
-        save_matches_state(data)
-        logger.info(f"\nCompleted updates at {datetime.now(pytz.UTC).isoformat()}Z")
+                    logger.error(f"Error processing match {match_data['match_number']}: {str(e)}")
+                    raise
+            return match_data
+        else:
+            # Process all matches (for manual runs)
+            matches_file = os.path.join(CONFIG_DIR, 'demo.json')
+            with open(matches_file, 'r') as f:
+                data = json.load(f)
+            
+            for match in data['matches']:
+                should_update, new_status = should_update_match(match)
+                if should_update:
+                    logger.info(f"Processing match {match['match_number']} ({match['status']} -> {new_status})")
+                    try:
+                        if update_sheet_for_match(match):
+                            match = update_match_status(match, new_status)
+                    except Exception as e:
+                        logger.error(f"Error processing match {match['match_number']}: {str(e)}")
+            
+            save_matches_state(data)
+            logger.info(f"Completed updates at {datetime.now(pytz.UTC).isoformat()}Z")
+            return data
         
     except Exception as e:
         logger.error(f"Error in main function: {str(e)}")

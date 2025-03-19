@@ -212,7 +212,6 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         "average_strike_rate": 0,
                         "player_stats": {}
                     }
-                    logger.info(f"Initialized team structure for: {team}")
         
         if len(team_names) < 2:
             team_names = []
@@ -227,7 +226,6 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             "average_strike_rate": 0,
                             "player_stats": {}
                         }
-                        logger.info(f"Initialized team structure for: {team_name}")
 
         if not team_names:
             raise ValueError("No teams found in scorecard")
@@ -248,8 +246,6 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
             batting_team = team_header.text.strip()
             bowling_team = team_names[1] if batting_team == team_names[0] else team_names[0]
             
-            logger.info(f"Batting team: {batting_team}")
-            logger.info(f"Bowling team: {bowling_team if bowling_team else 'Unknown'}")
             
             # Extract and process run rate
             run_rate = extract_run_rate(str(innings))
@@ -358,7 +354,6 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         scorecard_data[bowling_team]["player_stats"][player_name].update(bowling_stats)
 
         # Process dismissals
-        logger.info("Processing dismissals...")
         for record in dismissal_records:
             fielders = parse_dismissal_text(record['dismissal_text'])
             bowling_team_players = list(scorecard_data[record['bowling_team']]["player_stats"].keys())
