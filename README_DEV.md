@@ -36,7 +36,7 @@
     {
       "match_number": 1,
       "start_time": "2024-03-18T18:00:00Z",
-      "status": "pending",
+      "status": "not_started",
       "url": "espncricinfo-match-url",
       "gameweek": 1,
       "teams": {

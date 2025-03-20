@@ -131,6 +131,11 @@
       "role": "Allrounder"
     },
     {
+      "name": "Dasun Shanaka",
+      "team": "Delhi Capitals",
+      "role": "Allrounder"
+    },
+    {
       "name": "Ajay Mandal",
       "team": "Delhi Capitals",
       "role": "Allrounder"
@@ -261,7 +266,7 @@
       "role": "Allrounder"
     },
     {
-      "name": "Shahrukh Khan",
+      "name": "M Shahrukh Khan",
       "team": "Gujarat Titans",
       "role": "Allrounder"
     },
@@ -306,7 +311,7 @@
       "role": "Bowler"
     },
     {
-      "name": "Mohammad Siraj",
+      "name": "Mohammed Siraj",
       "team": "Gujarat Titans",
       "role": "Bowler"
     },
@@ -423,7 +428,7 @@
     {
       "name": "Luvnith Sisodia",
       "team": "Kolkata Knight Riders",
-      "role": "Batter"
+      "role": "Keeper"
     },
     {
       "name": "Varun Chakravarthy",
@@ -442,6 +447,11 @@
     },
     {
       "name": "Mayank Markande",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
+      "name": "Chetan Sakariya",
       "team": "Kolkata Knight Riders",
       "role": "Bowler"
     },
@@ -623,7 +633,7 @@
     {
       "name": "Ryan Rickelton",
       "team": "Mumbai Indians",
-      "role": "Batter"
+      "role": "Keeper"
     },
     {
       "name": "Will Jacks",
@@ -686,6 +696,11 @@
       "role": "Bowler"
     },
     {
+      "name": "Corbin Bosch",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
       "name": "Satyanarayana Raju",
       "team": "Mumbai Indians",
       "role": "Bowler"
@@ -693,7 +708,7 @@
     {
       "name": "Krishnan Shrijith",
       "team": "Mumbai Indians",
-      "role": "Bowler"
+      "role": "Keeper"
     },
     {
       "name": "Vignesh Puthur",
@@ -738,7 +753,7 @@
     {
       "name": "Praveen Dubey",
       "team": "Punjab Kings",
-      "role": "Allrounder"
+      "role": "Bowler"
     },
     {
       "name": "Shreyas Iyer",
@@ -1046,7 +1061,7 @@
       "role": "Allrounder"
     },
     {
-      "name": "Brydon Carse",
+      "name": "Wiaan Mulder",
       "team": "Sunrisers Hyderabad",
       "role": "Allrounder"
     },

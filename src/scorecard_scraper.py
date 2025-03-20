@@ -57,8 +57,8 @@ def create_default_player_stats() -> Dict[str, Any]:
     }
 
 def find_matching_player(name: str, player_stats: Dict[str, Any], is_sub: bool = False, 
-                        bowling_team_players: Optional[List[str]] = None) -> Tuple[Optional[str], bool]:
-    """Find matching player in statistics with improved matching logic"""
+                        bowling_team_players: Optional[List[str]] = None) -> Tuple[Optional[str], bool, Optional[str]]:
+    """Find matching player in statistics with improved matching logic. Returns (matched_name, is_new, error_message)"""
     original_name = name
     name = name.lower()
     name_parts = name.split()
@@ -69,7 +69,7 @@ def find_matching_player(name: str, player_stats: Dict[str, Any], is_sub: bool =
     search_players = bowling_team_players if bowling_team_players else player_stats
     
     if is_sub and original_name in search_players and player_stats[original_name]["is_sub"]:
-        return (original_name, False)
+        return (original_name, False, None)
     
     last_name_matches = []
     first_name_matches = []
@@ -78,7 +78,7 @@ def find_matching_player(name: str, player_stats: Dict[str, Any], is_sub: bool =
         player_lower = player.lower()
         
         if player_lower == name or player_lower.replace('-', ' ') == name:
-            return (player, False)
+            return (player, False, None)
             
         player_parts = player_lower.split()
         if player_parts and player_parts[-1] == last_name:
@@ -87,22 +87,20 @@ def find_matching_player(name: str, player_stats: Dict[str, Any], is_sub: bool =
             first_name_matches.append(player)
     
     if len(last_name_matches) == 1:
-        return (last_name_matches[0], False)
+        return (last_name_matches[0], False, None)
     elif len(last_name_matches) > 1 and first_letter:
         first_letter_matches = [p for p in last_name_matches if p.split()[0][0].lower() == first_letter]
         if len(first_letter_matches) == 1:
-            return (first_letter_matches[0], False)
+            return (first_letter_matches[0], False, None)
         
-        logger.warning(f"Multiple unresolved last name matches for '{original_name}': {last_name_matches}")
-        return (None, False)
+        return (None, False, f"Multiple unresolved last name matches: {last_name_matches}")
     
     if len(first_name_matches) == 1:
-        return (first_name_matches[0], False)
+        return (first_name_matches[0], False, None)
     elif len(first_name_matches) > 1:
-        logger.warning(f"Multiple unresolved first name matches for '{original_name}': {first_name_matches}")
-        return (None, False)
+        return (None, False, f"Multiple unresolved first name matches: {first_name_matches}")
     
-    return (original_name, True) if is_sub else (None, False)
+    return (original_name, True, None) if is_sub else (None, False, "No match found")
 
 def parse_dismissal_text(dismissal_text: str) -> List[str]:
     """Parse dismissal text and return list of fielder names involved"""
@@ -360,7 +358,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
             
             for fielder_name in fielders:
                 is_sub = ('sub' in record['dismissal_text'] and fielder_name in record['dismissal_text'].split('sub')[1])
-                matched_name, is_new = find_matching_player(
+                matched_name, is_new, error_msg = find_matching_player(
                     fielder_name, 
                     scorecard_data[record['bowling_team']]["player_stats"], 
                     is_sub,
@@ -381,6 +379,11 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                     elif "run out" in record['dismissal_text']:
                         points_per_fielder = 1.0 / len(fielders) if fielders else 0
                         scorecard_data[record['bowling_team']]["player_stats"][matched_name]["run_outs"] += points_per_fielder
+                else:
+                    error_context = f" in dismissal: {record['dismissal_text']}"
+                    if len(fielders) > 1:
+                        error_context += f" (multi-fielder dismissal with: {[f for f in fielders if f != fielder_name]})"
+                    logger.warning(f"Failed to match '{fielder_name}': {error_msg}{error_context}")
 
         # Player of the Match
         potm_header = soup.find('div', class_='ds-text-eyebrow-xs ds-uppercase ds-text-typo-mid2', string='Player Of The Match')

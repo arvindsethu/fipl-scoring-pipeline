@@ -2,21 +2,18 @@ import json
 import logging
 from google.cloud import storage
 from google.api_core import retry
+import sheets_config
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
 class StateManager:
-    def __init__(self, bucket_name, state_file_path='match_states/demo.json'):
-        """
-        Initialize StateManager with Cloud Storage configuration
-        
-        Args:
-            bucket_name (str): Name of the Cloud Storage bucket
-            state_file_path (str): Path to the state file in the bucket
-        """
+    """Manages the state of match processing in Google Cloud Storage"""
+    
+    def __init__(self, bucket_name, state_file_path=None):
+        """Initialize with bucket name and optional state file path"""
         self.bucket_name = bucket_name
-        self.state_file_path = state_file_path
+        self.state_file_path = state_file_path or sheets_config.STATE_FILE
         self.storage_client = storage.Client()
         self.bucket = self.storage_client.bucket(bucket_name)
 
