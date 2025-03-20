@@ -21,9 +21,19 @@ The system runs automatically during match hours (9:30 AM to 8:00 PM UTC) and:
 4. Updates scores to a Google Sheets dashboard
 5. Can handle multiple matches simultaneously
 
+## Manual Testing
 
-The system is designed to be fully automated, requiring no manual intervention during matches. All scores and statistics are automatically calculated and updated to provide a seamless fantasy cricket experience.
+For testing or demo purposes, you can run the pipeline manually:
 
+```bash
+# Process a specific match (with sheet updates)
+python manual_tools/scripts/run_pipeline.py --match-number 5
+
+# Process any scorecard URL (no sheet updates)
+python manual_tools/scripts/run_pipeline.py --url https://www.espncricinfo.com/series/...
+```
+
+The output will be saved to `manual_tools/outputs/scorecard.json`
 
 ## System Architecture
 
@@ -36,7 +46,7 @@ The system is designed to be fully automated, requiring no manual intervention d
 
 ### Cloud Infrastructure
 - **Cloud Function**: Serverless function that processes match data and updates scores
-- **Cloud Scheduler**: Triggers the function every 5 minutes between 9:30 AM and 8 PM UTC (varied times depending on matchday)
+- **Cloud Scheduler**: Triggers the function every 5 minutes during match hours
 - **Google Sheets API**: Used for storing and displaying fantasy scores
 
 ### Update Frequency

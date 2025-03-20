@@ -10,9 +10,11 @@ venv/
 env/
 .idea/
 demo.log
+manual_tools/
+README.md
+README_DEV.md
 !config/
 !src/
 !requirements.txt
 !main.py
-!sheets_config.py
-README.md 
+!sheets_config.py 

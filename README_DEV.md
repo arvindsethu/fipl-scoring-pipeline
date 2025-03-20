@@ -1,4 +1,3 @@
-
 ## Components
 
 ### 1. Match Data Scraping (`scorecard_scraper.py`)
@@ -26,6 +25,29 @@
 - Cloud Function entry point
 - Manages match state and update cycles
 - Coordinates between scraping, calculation, and update components
+
+### 5. Manual Testing Tools (`manual_tools/`)
+- Local testing and demonstration utilities
+- Two modes of operation:
+  1. Match Number Mode:
+     ```bash
+     python manual_tools/scripts/run_pipeline.py --match-number <number>
+     ```
+     - Reads match data from `ipl_2025_matches.json`
+     - Runs complete pipeline including sheet updates
+     - Useful for testing specific matches
+
+  2. Direct URL Mode:
+     ```bash
+     python manual_tools/scripts/run_pipeline.py --url <scorecard_url>
+     ```
+     - Processes any ESPNCricinfo scorecard URL
+     - Runs scraper and calculator only (no sheet updates)
+     - Useful for quick testing and demonstrations
+
+- Output is always saved to `manual_tools/outputs/scorecard.json`
+- Handles quoted and unquoted URLs
+- Provides progress feedback during execution
 
 ## Configuration Files
 

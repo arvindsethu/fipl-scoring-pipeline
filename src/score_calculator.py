@@ -11,6 +11,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONFIG_DIR = os.path.join(BASE_DIR, 'config')
 TMP_DIR = '/tmp'
 
+# Set to keep track of players with unknown roles
+unknown_role_players = set()
+
+def get_player_role(player_name: str) -> str:
+    """Get player role and log warning only once if role is unknown"""
+    role = player_roles.get(player_name, "Unknown")
+    if role == "Unknown" and player_name not in unknown_role_players:
+        logger.error(f"Invalid or missing player role for {player_name}")
+        unknown_role_players.add(player_name)
+    return role
+
 def load_config_files():
     """Load configuration files with proper error handling"""
     try:
@@ -37,10 +48,9 @@ def calculate_batting_points(stats: Dict[str, Any], player_name: str) -> tuple[f
     runs_points = 0
     strike_rate_points = 0
     boundaries_points = 0
-    player_role = player_roles.get(player_name, "Unknown")
+    player_role = get_player_role(player_name)
     
     if player_role == "Unknown":
-        logger.error(f"Invalid or missing player role for {player_name}")
         return (0, 0, 0, 0)
 
     try:
@@ -152,10 +162,9 @@ def calculate_bowling_points(stats: Dict[str, Any], player_name: str) -> tuple[f
     economy_points = 0
     extras_points = 0
     dots_points = 0
-    player_role = player_roles.get(player_name, "Unknown")
+    player_role = get_player_role(player_name)
     
     if player_role == "Unknown":
-        logger.error(f"Invalid or missing player role for {player_name}")
         return (0, 0, 0, 0, 0, 0)
 
     try:
@@ -306,10 +315,9 @@ def calculate_bowling_points(stats: Dict[str, Any], player_name: str) -> tuple[f
 # Function to calculate fielding points
 def calculate_fielding_points(stats: Dict[str, Any], player_name: str) -> float:
     fielding_points = 0
-    player_role = player_roles.get(player_name, "Unknown")
+    player_role = get_player_role(player_name)
     
     if player_role == "Unknown":
-        logger.error(f"Invalid or missing player role for {player_name}")
         return fielding_points
 
     try:
@@ -339,7 +347,7 @@ def calculate_fielding_points(stats: Dict[str, Any], player_name: str) -> float:
 
 # Function to calculate player of the match points
 def calculate_potm_points(stats: Dict[str, Any], player_name: str) -> float:
-    player_role = player_roles.get(player_name, "Unknown")
+    player_role = get_player_role(player_name)
     
     if player_role == "Unknown":
         return 0
