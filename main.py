@@ -31,7 +31,9 @@ def get_update_frequency(match_start_time, current_time):
 def should_process_match(match, current_time):
     """Determine if a match should be processed based on its timing and status"""
     try:
-        start_time = datetime.fromisoformat(match['start_time'].replace('Z', '+00:00'))
+        # Convert +0000 to +00:00 in the timezone format
+        start_time_str = match['start_time'].replace('+0000', '+00:00')
+        start_time = datetime.fromisoformat(start_time_str)
         current_status = match.get('status', 'not_started')
         
         # If match is already completed, keep it completed
@@ -54,7 +56,9 @@ def should_process_match(match, current_time):
         last_update_str = match.get('last_update')
         if last_update_str and last_update_str != "null":
             try:
-                last_update = datetime.fromisoformat(last_update_str.replace('Z', '+00:00'))
+                # Also handle timezone format for last_update
+                last_update_str = last_update_str.replace('+0000', '+00:00')
+                last_update = datetime.fromisoformat(last_update_str)
             except ValueError:
                 last_update = None
         
@@ -102,7 +106,10 @@ def update_scores(request):
         matches_updated = False
         processed_matches = []
         status_changes = []
-        skipped_matches = {"completed": [], "not_started": []}
+        skipped_matches = {
+            "completed": [],
+            "not_started": []
+        }
         
         # Process each match
         for match in data['matches']:
@@ -135,8 +142,25 @@ def update_scores(request):
                     else:
                         logger.error(f"Error updating match {match_num}: {str(e)}")
             else:
-                if new_status in ["completed", "not_started"]:
-                    skipped_matches[new_status].append(match_num)
+                # Handle skipped matches
+                if new_status == "completed":
+                    skipped_matches["completed"].append(match_num)
+                elif new_status == "not_started":
+                    skipped_matches["not_started"].append(match_num)
+                elif new_status == "in_progress":
+                    # Calculate next update time for in-progress matches
+                    last_update_str = match.get('last_update')
+                    if last_update_str and last_update_str != "null":
+                        last_update = datetime.fromisoformat(last_update_str.replace('+0000', '+00:00'))
+                        next_update = last_update + timedelta(minutes=frequency)
+                        next_update_str = next_update.strftime('%H:%M UTC')
+                        minutes_until = round((next_update - current_time).total_seconds() / 60)
+                        logger.info(f"Skipping in-progress match {match_num} - next update in {minutes_until} minutes (at {next_update_str})")
+        
+        # Log skipped matches by category (excluding in_progress)
+        for category, matches in skipped_matches.items():
+            if matches:
+                logger.info(f"Skipping {category} matches: {', '.join(map(str, matches))}")
         
         # Save updated match states if any changes were made
         if matches_updated:
