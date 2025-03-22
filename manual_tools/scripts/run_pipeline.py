@@ -8,9 +8,25 @@ sys.path.insert(0, project_root)
 import json
 import argparse
 import tempfile
+import logging
 from src.scorecard_scraper import scrape_scorecard
 from src.score_calculator import calculate_scores_and_update_sheet
 from src.sheet_updater import update_sheet_for_match
+
+# Configure logging
+logging.basicConfig(
+    level=logging.WARNING,  # Set general logging to WARNING to suppress most messages
+    format='%(message)s'  # Clean format without timestamps
+)
+
+# Only show player matching issues and match info
+logger = logging.getLogger('src.scorecard_scraper')
+logger.setLevel(logging.INFO)
+
+# Disable all other loggers
+logging.getLogger('urllib3').setLevel(logging.WARNING)
+logging.getLogger('requests').setLevel(logging.WARNING)
+logging.getLogger('googleapiclient').setLevel(logging.WARNING)
 
 # Constants
 CONFIG_DIR = os.path.join(project_root, 'config')
@@ -33,27 +49,26 @@ def load_match_by_number(match_number):
 
 def process_url(url):
     """Process a single URL without sheet updates"""
-    print(f"\nProcessing URL: {url}")
-    print("Mode: Scrape and calculate only (no sheet updates)")
-    
     try:
         # Scrape scorecard
-        print("\nScraping scorecard...")
         scorecard_data = scrape_scorecard(url)
         
+        if "error" in scorecard_data:
+            print(f"Error: {scorecard_data['error']}")
+            return
+            
         # Save to temporary file for score calculation
         temp_file = os.path.join(OUTPUT_DIR, 'scorecard.json')
         with open(temp_file, 'w', encoding='utf-8') as f:
             json.dump(scorecard_data, f, indent=2)
         
         # Calculate scores
-        print("Calculating scores...")
         calculate_scores_and_update_sheet(temp_file)
         
-        print(f"\nSuccess! Output saved to: {temp_file}")
+        print(f"Success! Output saved to: {temp_file}")
         
     except Exception as e:
-        print(f"Error processing URL: {str(e)}")
+        print(f"Error: {str(e)}")
         raise
 
 def process_match(match_number):

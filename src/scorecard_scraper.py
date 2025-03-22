@@ -61,51 +61,92 @@ def create_default_player_stats() -> Dict[str, Any]:
         "total_points": 0
     }
 
-def find_matching_player(name: str, player_stats: Dict[str, Any], is_sub: bool = False, 
-                        bowling_team_players: Optional[List[str]] = None) -> Tuple[Optional[str], bool, Optional[str]]:
-    """Find matching player in statistics with improved matching logic. Returns (matched_name, is_new, error_message)"""
-    original_name = name
+def normalize_team_name(team_name: str) -> str:
+    """Normalize team name to handle variations"""
+    team_name = team_name.lower()
+    
+    # Handle known variations
+    if "chennai" in team_name:
+        return "Chennai Superkings"  # Will match both Super Kings and Superkings
+    elif "lucknow" in team_name:
+        return "Lucknow Supergiants"  # Will match both Super Giants and Supergiants
+    elif any(x in team_name for x in ["rcb", "royal challengers", "bengaluru", "bangalore"]):
+        return "Royal Challengers Bengaluru"
+    
+    # For other teams, just capitalize words
+    return ' '.join(word.capitalize() for word in team_name.split())
+
+def find_matching_player(name: str, team_name: str, existing_players: List[str], players_data: Dict[str, Any]) -> Tuple[Optional[str], bool, Optional[str]]:
+    """Find matching player from players.json data"""
+    logger = logging.getLogger(__name__)
+    
+    # Parse name
     name = name.lower()
     name_parts = name.split()
     last_name = name_parts[-1] if name_parts else ''
-    first_name = name_parts[0] if name_parts else ''
+    first_name = name_parts[0] if len(name_parts) > 1 else ''
     first_letter = first_name[0] if first_name else ''
+    has_multiple_parts = len(name_parts) > 1
     
-    search_players = bowling_team_players if bowling_team_players else player_stats
+    # Load and filter players from config
+    try:
+        with open(os.path.join(CONFIG_DIR, 'players.json')) as f:
+            all_players = json.load(f)['players']
+    except Exception as e:
+        logger.error("Failed to load players.json: %s", str(e))
+        return None, False, f"Failed to load players.json: {str(e)}"
     
-    if is_sub and original_name in search_players and player_stats[original_name]["is_sub"]:
-        return (original_name, False, None)
+    # Filter players by team
+    normalized_team = normalize_team_name(team_name)
+    team_players = [p['name'] for p in all_players if normalize_team_name(p['team']) == normalized_team]
+    if not team_players:
+        logger.warning("No players found for team: %s", team_name)
+        return None, False, f"No players found for team: {team_name}"
     
+    # Find matches
     last_name_matches = []
     first_name_matches = []
     
-    for player in search_players:
+    for player in team_players:
         player_lower = player.lower()
-        
-        if player_lower == name or player_lower.replace('-', ' ') == name:
-            return (player, False, None)
-            
         player_parts = player_lower.split()
-        if player_parts and player_parts[-1] == last_name:
+        player_last = player_parts[-1] if player_parts else ''
+        player_first = player_parts[0] if player_parts else ''
+        
+        # Try exact match first
+        if player_lower == name:
+            return player, False, None
+        
+        if player_last == last_name:
             last_name_matches.append(player)
-        elif len(first_name) > 1 and player_parts and player_parts[0].startswith(first_name):
+            
+        if player_first == first_name:
             first_name_matches.append(player)
     
+    # Single last name match
     if len(last_name_matches) == 1:
-        return (last_name_matches[0], False, None)
-    elif len(last_name_matches) > 1 and first_letter:
-        first_letter_matches = [p for p in last_name_matches if p.split()[0][0].lower() == first_letter]
-        if len(first_letter_matches) == 1:
-            return (first_letter_matches[0], False, None)
+        return last_name_matches[0], False, None
+    
+    # Multiple last name matches - try to resolve
+    if len(last_name_matches) > 1:
+        logger.warning("Multiple matches found for '%s' in %s: %s", name, team_name, last_name_matches)
         
-        return (None, False, f"Multiple unresolved last name matches: {last_name_matches}")
+        # Only try first letter match if the original name has multiple parts
+        if has_multiple_parts:
+            first_letter_matches = [p for p in last_name_matches if p.lower()[0] == first_letter]
+            if len(first_letter_matches) == 1:
+                return first_letter_matches[0], False, None
+            
+        # Try existing players
+        if existing_players:
+            matches_in_existing = [p for p in last_name_matches if p in existing_players]
+            if len(matches_in_existing) == 1:
+                return matches_in_existing[0], False, None
+        
+        return None, False, f"Multiple unresolved last name matches: {last_name_matches}"
     
-    if len(first_name_matches) == 1:
-        return (first_name_matches[0], False, None)
-    elif len(first_name_matches) > 1:
-        return (None, False, f"Multiple unresolved first name matches: {first_name_matches}")
-    
-    return (original_name, True, None) if is_sub else (None, False, "No match found")
+    logger.warning("No matches found for '%s' in %s", name, team_name)
+    return None, False, f"No match found for: {name}"
 
 def parse_dismissal_text(dismissal_text: str) -> List[str]:
     """Parse dismissal text and return list of fielder names involved"""
@@ -181,9 +222,11 @@ def extract_run_rate(innings_html: str) -> Optional[float]:
 def get_enhanced_headers():
     """Get enhanced headers that successfully bypass scraping protection"""
     user_agents = [
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0',
         'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6.1 Safari/605.1.15',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.2 Safari/605.1.15',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5.2 Safari/605.1.15'
     ]
     
     return {
@@ -205,7 +248,7 @@ def get_enhanced_headers():
 
 def scrape_scorecard(url: str) -> Dict[str, Any]:
     """Scrape cricket scorecard data from ESPNCricinfo URL"""
-    logger.info(f"Fetching scorecard from: {url}")
+    logger = logging.getLogger(__name__)
     
     try:
         headers = get_enhanced_headers()
@@ -215,10 +258,13 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
             timeout=30,
             verify=False
         )
+        
+        if response.status_code == 403:
+            return {"error": "Access denied (403) - Please try again later"}
+        
         response.raise_for_status()
     except requests.RequestException as e:
-        logger.error(f"Failed to fetch URL: {str(e)}")
-        return {"error": "Failed to fetch URL"}
+        return {"error": f"Failed to fetch URL: {str(e)}"}
 
     try:
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -259,17 +305,16 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         }
 
         if not team_names:
-            logger.error("No teams found in scorecard")
             return {"error": "No teams found in scorecard"}
 
-        logger.info(f"Teams found: {team_names}")
+        logger.info("Teams found: %s", team_names)
         
         # Store dismissals for later processing
         dismissal_records = []
         
         # Process innings
         for innings_num, innings in enumerate(innings_divs, 1):
-            logger.info(f"Processing innings {innings_num}")
+            logger.info("Processing innings %d", innings_num + 1)
             
             team_header = innings.find('span', class_='ds-text-title-xs ds-font-bold ds-capitalize')
             if not team_header:
@@ -278,7 +323,6 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
             batting_team = team_header.text.strip()
             bowling_team = team_names[1] if batting_team == team_names[0] else team_names[0]
             
-            
             # Extract and process run rate
             run_rate = extract_run_rate(str(innings))
             if run_rate:
@@ -286,21 +330,17 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 avg_economy = float(f"{run_rate:.2f}")
                 
                 scorecard_data[batting_team]["average_strike_rate"] = avg_strike_rate
-                if bowling_team:
-                    scorecard_data[bowling_team]["average_economy"] = avg_economy
+                scorecard_data[bowling_team]["average_economy"] = avg_economy
                 
-                logger.info(f"Updated {batting_team} avg SR: {avg_strike_rate:.2f}")
-                if bowling_team:
-                    logger.info(f"Updated {bowling_team} avg economy: {avg_economy:.2f}")
-            else:
-                logger.warning(f"Could not find run rate for innings {innings_num}")
+                logger.info("Updated %s avg SR: %.2f", batting_team, avg_strike_rate)
+                logger.info("Updated %s avg economy: %.2f", bowling_team, avg_economy)
             
             # Process batting
             batting_table = innings.find('table', class_='ci-scorecard-table')
             if batting_table:
                 player_cells = batting_table.find_all('td', class_=['ds-w-0 ds-whitespace-nowrap ds-min-w-max', 
                     'ds-w-0 ds-whitespace-nowrap ds-min-w-max ds-border-line-primary ci-scorecard-player-notout'])
-                logger.info(f"Batting players found: {len(player_cells)}")
+                logger.info("Batting players found: %d", len(player_cells))
                 
                 for player_cell in player_cells:
                     player_link = player_cell.find('a')
@@ -329,14 +369,20 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             avg_sr = scorecard_data[batting_team]["average_strike_rate"]
                             sr_differential = float(f"{((strike_rate - avg_sr) / avg_sr * 100) if avg_sr > 0 else 0.0:.1f}")
                             
+                            # Get runs scored before deciding did_not_bat status
+                            runs_scored = int(cells[2].text.strip() or 0)
+                            
+                            # Set did_not_bat to "Yes" if player is not out and has 0 runs
+                            did_not_bat = "Yes" if runs_scored == 0 and dismissal_info == "not out" else "No"
+                            
                             scorecard_data[batting_team]["player_stats"][player_name].update({
-                                "runs_scored": int(cells[2].text.strip() or 0),
+                                "runs_scored": runs_scored,
                                 "balls_faced": int(cells[3].text.strip() or 0),
                                 "fours": int(cells[5].text.strip() or 0),
                                 "sixes": int(cells[6].text.strip() or 0),
                                 "strike_rate": strike_rate,
                                 "sr_differential": sr_differential,
-                                "did_not_bat": "No"
+                                "did_not_bat": did_not_bat
                             })
 
                 # Process did not bat
@@ -350,7 +396,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             if player_name not in scorecard_data[batting_team]["player_stats"]:
                                 scorecard_data[batting_team]["player_stats"][player_name] = create_default_player_stats()
 
-            # Process bowling
+            # Process bowling - only if we have a bowling team
             if bowling_team:
                 bowling_table = innings.find('table', class_='ds-w-full ds-table ds-table-md ds-table-auto')
                 if bowling_table:
@@ -385,8 +431,11 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         
                         scorecard_data[bowling_team]["player_stats"][player_name].update(bowling_stats)
 
-        # Process dismissals
+        # Process dismissals - only if we have bowling team records
         for record in dismissal_records:
+            if record['bowling_team'] not in scorecard_data:
+                continue
+                
             fielders = parse_dismissal_text(record['dismissal_text'])
             bowling_team_players = list(scorecard_data[record['bowling_team']]["player_stats"].keys())
             
@@ -394,9 +443,9 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 is_sub = ('sub' in record['dismissal_text'] and fielder_name in record['dismissal_text'].split('sub')[1])
                 matched_name, is_new, error_msg = find_matching_player(
                     fielder_name, 
-                    scorecard_data[record['bowling_team']]["player_stats"], 
-                    is_sub,
-                    bowling_team_players
+                    record['bowling_team'],
+                    bowling_team_players,
+                    scorecard_data[record['bowling_team']]["player_stats"]
                 )
                 
                 if matched_name:
@@ -417,7 +466,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                     error_context = f" in dismissal: {record['dismissal_text']}"
                     if len(fielders) > 1:
                         error_context += f" (multi-fielder dismissal with: {[f for f in fielders if f != fielder_name]})"
-                    logger.warning(f"Failed to match '{fielder_name}': {error_msg}{error_context}")
+                    logger.warning(f"Failed to match '{fielder_name}': {error_msg}{error_context}\n")
 
         # Player of the Match
         potm_header = soup.find('div', class_='ds-text-eyebrow-xs ds-uppercase ds-text-typo-mid2', string='Player Of The Match')
@@ -448,14 +497,49 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
         return scorecard_data
 
     except Exception as e:
-        logger.error(f"Error parsing scorecard: {str(e)}")
         return {"error": f"Error parsing scorecard: {str(e)}"}
+
+def test_player_matching():
+    """Test function to verify player matching logic"""
+    logger.setLevel(logging.DEBUG)
+    
+    # Test team name normalization
+    print("\nTesting team name normalization:")
+    test_teams = [
+        "Royal Challengers Bangalore",
+        "Royal Challengers Bengaluru",
+        "RCB",
+        "Chennai Super Kings",
+        "Chennai Superkings",
+        "CSK",
+        "Lucknow Super Giants",
+        "Lucknow Supergiants",
+        "LSG"
+    ]
+    for team in test_teams:
+        normalized = normalize_team_name(team)
+        print(f"'{team}' -> '{normalized}'")
+    
+    # Test the Jitesh/Suyash Sharma case
+    print("\nTesting Sharma matching:")
+    result = find_matching_player(
+        "Sharma",  # As it would come from dismissal text after cleaning
+        {},  # Empty player stats
+        False,  # Not a sub
+        [],  # No bowling team players yet
+        "Royal Challengers Bengaluru"  # The team they play for
+    )
+    
+    print(f"\nTest result for 'Sharma':")
+    print(f"Matched name: {result}")
 
 if __name__ == "__main__":
     # Setup basic logging for local testing
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
     
-    import sys
     if len(sys.argv) > 1:
         url = sys.argv[1]
         try:
@@ -464,5 +548,8 @@ if __name__ == "__main__":
         except Exception as e:
             logger.error(f"Failed to scrape scorecard: {str(e)}")
             sys.exit(1)
+    else:
+        # Run test if no URL provided
+        test_player_matching()
 
 
