@@ -5,6 +5,11 @@ from bs4 import BeautifulSoup
 import re
 import logging
 from typing import Dict, Any, List, Optional, Tuple
+import random
+import urllib3
+
+# Suppress SSL-related warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Constants for Cloud Function environment
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -173,24 +178,52 @@ def extract_run_rate(innings_html: str) -> Optional[float]:
                 return None
     return None
 
+def get_enhanced_headers():
+    """Get enhanced headers that successfully bypass scraping protection"""
+    user_agents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Safari/605.1.15',
+    ]
+    
+    return {
+        'User-Agent': random.choice(user_agents),
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
+        'Sec-Fetch-Dest': 'document',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'none',
+        'Sec-Fetch-User': '?1',
+        'Cache-Control': 'max-age=0',
+        'DNT': '1',
+        'Referer': 'https://www.espncricinfo.com/',
+        'Origin': 'https://www.espncricinfo.com'
+    }
+
 def scrape_scorecard(url: str) -> Dict[str, Any]:
     """Scrape cricket scorecard data from ESPNCricinfo URL"""
     logger.info(f"Fetching scorecard from: {url}")
     
     try:
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        response = requests.get(url, headers=headers, timeout=30)
+        headers = get_enhanced_headers()
+        response = requests.get(
+            url,
+            headers=headers,
+            timeout=30,
+            verify=False
+        )
         response.raise_for_status()
     except requests.RequestException as e:
         logger.error(f"Failed to fetch URL: {str(e)}")
-        raise
-
-    soup = BeautifulSoup(response.content, 'html.parser')
-    scorecard_data: Dict[str, Any] = {}
+        return {"error": "Failed to fetch URL"}
 
     try:
+        soup = BeautifulSoup(response.content, 'html.parser')
+        scorecard_data: Dict[str, Any] = {}
+
         # Extract team names and initialize data structure
         innings_divs = soup.find_all('div', class_='ds-rounded-lg')[:2]
         team_names = []
@@ -226,7 +259,8 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         }
 
         if not team_names:
-            raise ValueError("No teams found in scorecard")
+            logger.error("No teams found in scorecard")
+            return {"error": "No teams found in scorecard"}
 
         logger.info(f"Teams found: {team_names}")
         
@@ -415,7 +449,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
 
     except Exception as e:
         logger.error(f"Error parsing scorecard: {str(e)}")
-        raise
+        return {"error": f"Error parsing scorecard: {str(e)}"}
 
 if __name__ == "__main__":
     # Setup basic logging for local testing
