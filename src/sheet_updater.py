@@ -216,29 +216,31 @@ def update_team_stats(sheet_service, sheet_mappings, match_data, scorecard_data)
     except Exception as e:
         logger.error(f"Error updating team stats: {str(e)}")
 
-def update_sheet_for_match(match_data):
+def update_sheet_for_match(match_data, scorecard_data=None):
     """Process a single match and update the sheet with improved error handling"""
     sheet_service = get_sheet_service()
     sheet_mappings, field_mappings = load_config()
     updated_players = []
 
     try:
-        # Scrape match data
-        scorecard_data = scrape_scorecard(match_data['url'])
-        
-        # Save scorecard data to temp file
-        scorecard_path = os.path.join(TMP_DIR, f"scorecard_{match_data['match_number']}.json")
-        os.makedirs(TMP_DIR, exist_ok=True)
-        
-        with open(scorecard_path, 'w', encoding='utf-8') as f:
-            json.dump(scorecard_data, f, indent=4)
-        
-        # Calculate points and get updated scorecard data
-        calculate_scores_and_update_sheet(scorecard_path)
-        
-        # Read the updated scorecard with points
-        with open(scorecard_path, 'r', encoding='utf-8') as f:
-            scorecard_data = json.load(f)
+        # If scorecard_data not provided, scrape and calculate
+        if scorecard_data is None:
+            # Scrape match data
+            scorecard_data = scrape_scorecard(match_data['url'])
+            
+            # Save scorecard data to temp file
+            scorecard_path = os.path.join(TMP_DIR, f"scorecard_{match_data['match_number']}.json")
+            os.makedirs(TMP_DIR, exist_ok=True)
+            
+            with open(scorecard_path, 'w', encoding='utf-8') as f:
+                json.dump(scorecard_data, f, indent=4)
+            
+            # Calculate points and get updated scorecard data
+            calculate_scores_and_update_sheet(scorecard_path)
+            
+            # Read the updated scorecard with points
+            with open(scorecard_path, 'r', encoding='utf-8') as f:
+                scorecard_data = json.load(f)
         
         # Update team stats
         update_team_stats(sheet_service, sheet_mappings, match_data, scorecard_data)
@@ -297,12 +299,13 @@ def update_sheet_for_match(match_data):
         if updated_players:
             logger.info(f"Updated {len(updated_players)} players in sheet")
         
-        # Clean up temp file
-        try:
-            os.remove(scorecard_path)
-            logger.info(f"Cleaned up temporary file: {scorecard_path}")
-        except Exception as e:
-            logger.warning(f"Could not remove temporary file: {str(e)}")
+        # Clean up temp file if we created it
+        if scorecard_data is None:
+            try:
+                os.remove(scorecard_path)
+                logger.info(f"Cleaned up temporary file: {scorecard_path}")
+            except Exception as e:
+                logger.warning(f"Could not remove temporary file: {str(e)}")
         
         return True
         

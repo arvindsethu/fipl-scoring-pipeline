@@ -250,30 +250,50 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
     """Scrape cricket scorecard data from ESPNCricinfo URL"""
     logger = logging.getLogger(__name__)
     
-    try:
-        headers = get_enhanced_headers()
-        response = requests.get(
-            url,
-            headers=headers,
-            timeout=30,
-            verify=False
-        )
-        
-        if response.status_code == 403:
-            return {"error": "Access denied (403) - Please try again later"}
-        
-        response.raise_for_status()
-    except requests.RequestException as e:
-        return {"error": f"Failed to fetch URL: {str(e)}"}
+    # Try up to 3 times with different headers
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            headers = get_enhanced_headers()  # This will get a random user agent each time
+            logger.info(f"Attempt {attempt + 1}/{max_retries} to fetch scorecard")
+            
+            response = requests.get(
+                url,
+                headers=headers,
+                timeout=30,
+                verify=False
+            )
+            
+            if response.status_code == 403:
+                logger.error(f"Access denied (403) on attempt {attempt + 1}/{max_retries}")
+                if attempt < max_retries - 1:
+                    logger.info("Retrying with different headers...")
+                    continue
+                else:
+                    logger.error("All retry attempts failed with 403 errors")
+                    return {"error": "Access denied (403) - All retry attempts failed"}
+            
+            response.raise_for_status()
+            break  # If we get here, the request was successful
+            
+        except requests.RequestException as e:
+            logger.error(f"Failed to fetch URL on attempt {attempt + 1}/{max_retries}: {str(e)}")
+            if attempt < max_retries - 1:
+                logger.info("Retrying with different headers...")
+                continue
+            else:
+                logger.error("All retry attempts failed")
+                return {"error": f"Failed to fetch URL after {max_retries} attempts: {str(e)}"}
 
     try:
         soup = BeautifulSoup(response.content, 'html.parser')
         scorecard_data: Dict[str, Any] = {}
 
         # Extract team names and initialize data structure
-        innings_divs = soup.find_all('div', class_='ds-rounded-lg')[:2]
+        innings_divs = soup.find_all('div', class_='ds-rounded-lg')
         team_names = []
         
+        # First try to get teams from match header
         match_header = soup.find('div', class_='ds-text-tight-m ds-font-regular ds-text-typo-mid3')
         if match_header:
             teams_text = match_header.text.strip()
@@ -290,6 +310,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         "player_stats": {}
                     }
         
+        # If we don't have both teams, try to get them from innings headers
         if len(team_names) < 2:
             team_names = []
             for innings in innings_divs:
@@ -313,15 +334,20 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
         dismissal_records = []
         
         # Process innings
-        for innings_num, innings in enumerate(innings_divs, 1):
-            logger.info("Processing innings %d", innings_num + 1)
-            
+        for innings_num, innings in enumerate(innings_divs):
             team_header = innings.find('span', class_='ds-text-title-xs ds-font-bold ds-capitalize')
             if not team_header:
                 continue
                 
             batting_team = team_header.text.strip()
-            bowling_team = team_names[1] if batting_team == team_names[0] else team_names[0]
+            logger.info("Processing %s innings", batting_team)
+            
+            # Find bowling team - it's the other team in the match
+            bowling_team = None
+            for team in team_names:
+                if team != batting_team:
+                    bowling_team = team
+                    break
             
             # Extract and process run rate
             run_rate = extract_run_rate(str(innings))
@@ -330,10 +356,12 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 avg_economy = float(f"{run_rate:.2f}")
                 
                 scorecard_data[batting_team]["average_strike_rate"] = avg_strike_rate
-                scorecard_data[bowling_team]["average_economy"] = avg_economy
+                if bowling_team:
+                    scorecard_data[bowling_team]["average_economy"] = avg_economy
                 
                 logger.info("Updated %s avg SR: %.2f", batting_team, avg_strike_rate)
-                logger.info("Updated %s avg economy: %.2f", bowling_team, avg_economy)
+                if bowling_team:
+                    logger.info("Updated %s avg economy: %.2f", bowling_team, avg_economy)
             
             # Process batting
             batting_table = innings.find('table', class_='ci-scorecard-table')

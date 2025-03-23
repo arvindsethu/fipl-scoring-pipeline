@@ -94,9 +94,13 @@ def process_match(match_number):
         print("Calculating scores...")
         calculate_scores_and_update_sheet(temp_file)
         
+        # Read the updated scorecard with points
+        with open(temp_file, 'r', encoding='utf-8') as f:
+            scorecard_data = json.load(f)
+        
         # Update sheet
         print("Updating sheet...")
-        update_sheet_for_match(match_data)
+        update_sheet_for_match(match_data, scorecard_data)
         
         print(f"\nSuccess! Output saved to: {temp_file}")
         
