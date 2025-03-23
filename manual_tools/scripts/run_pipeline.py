@@ -15,15 +15,15 @@ from src.sheet_updater import update_sheet_for_match
 
 # Configure logging
 logging.basicConfig(
-    level=logging.WARNING,  # Set general logging to WARNING to suppress most messages
+    level=logging.INFO,  # Show all info messages
     format='%(message)s'  # Clean format without timestamps
 )
 
-# Only show player matching issues and match info
+# Get logger instance
 logger = logging.getLogger('src.scorecard_scraper')
 logger.setLevel(logging.INFO)
 
-# Disable all other loggers
+# Disable verbose loggers
 logging.getLogger('urllib3').setLevel(logging.WARNING)
 logging.getLogger('requests').setLevel(logging.WARNING)
 logging.getLogger('googleapiclient').setLevel(logging.WARNING)

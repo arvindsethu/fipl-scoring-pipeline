@@ -8,10 +8,13 @@ from src.sheet_updater import main as update_main
 from src.state_manager import StateManager
 
 # Setup logging for Cloud Functions
-logger = logging.getLogger()
-if not logger.handlers:
-    logger.addHandler(logging.StreamHandler())
-logger.setLevel(logging.WARNING)  # Only show warnings and errors by default
+logging.basicConfig(
+    level=logging.INFO,  # Show all info messages
+    format='%(message)s'  # Clean format without timestamps
+)
+
+# Get logger instance
+logger = logging.getLogger(__name__)
 
 # Allow essential match info through
 logging.getLogger('src.scorecard_scraper').setLevel(logging.INFO)
@@ -159,7 +162,8 @@ def update_scores(request):
         status_changes = []
         skipped_matches = {
             "completed": [],
-            "not_started": []
+            "not_started": [],
+            "in_progress": []  # Added to track in-progress skipped matches
         }
         
         # Process each match
@@ -199,18 +203,22 @@ def update_scores(request):
                 elif new_status == "not_started":
                     skipped_matches["not_started"].append(match_num)
                 elif new_status == "in_progress":
+                    skipped_matches["in_progress"].append(match_num)
                     # Calculate next update time for in-progress matches
                     last_update = parse_datetime(match.get('last_update'))
-                    if last_update:
+                    if last_update and frequency:
                         next_update = last_update + timedelta(minutes=frequency)
                         next_update_str = next_update.strftime('%H:%M UTC')
                         minutes_until = round((next_update - current_time).total_seconds() / 60)
                         logger.info(f"Skipping in-progress match {match_num} - next update in {minutes_until} minutes (at {next_update_str})")
+                        logger.info(current_time.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + " GMT")
         
-        # Log skipped matches by category (excluding in_progress)
-        for category, matches in skipped_matches.items():
-            if matches:
-                logger.info(f"Skipping {category} matches: {', '.join(map(str, matches))}")
+        # Log skipped matches by category
+        if skipped_matches["completed"]:
+            logger.info(f"Skipping completed matches: {', '.join(map(str, sorted(skipped_matches['completed'])))}")
+        
+        if skipped_matches["not_started"]:
+            logger.info(f"Skipping not_started matches: {', '.join(map(str, sorted(skipped_matches['not_started'])))}")
         
         # Save updated match states if any changes were made
         if matches_updated:

@@ -20,6 +20,7 @@ TMP_DIR = tempfile.gettempdir()  # This will get the correct temp directory for 
 
 # Configure logging
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)  # Ensure we see important sheet updates
 
 class SheetUpdateError(Exception):
     """Custom exception for sheet update errors"""
@@ -167,6 +168,54 @@ def update_sheet_with_retry(service, spreadsheet_id, range_name, values, value_i
             logger.error(f"Sheet update failed: {str(e)}")
             raise SheetUpdateError(f"Failed to update sheet: {str(e)}")
 
+def update_team_stats(sheet_service, sheet_mappings, match_data, scorecard_data):
+    """Update team stats (SR and Economy) for a match"""
+    try:
+        # Calculate target row based on match number
+        target_row = sheet_mappings['team_stats']['start_row'] + match_data['match_number'] - 1
+        
+        # Get team stats columns
+        columns = sheet_mappings['team_stats']['columns']
+        
+        # Get teams in order from match_data
+        teams = list(match_data['teams'].keys())
+        if len(teams) != 2:
+            logger.warning(f"Expected 2 teams in match_data, found {len(teams)}")
+            return
+            
+        # Update team1 stats if available
+        if teams[0] in scorecard_data:
+            team1_values = [
+                scorecard_data[teams[0]]['average_strike_rate'],
+                scorecard_data[teams[0]]['average_economy']
+            ]
+            team1_range = f"{columns['team1_sr']}{target_row}:{columns['team1_economy']}{target_row}"
+            update_sheet_with_retry(
+                sheet_service,
+                sheets_config.SPREADSHEET_ID,
+                team1_range,
+                [team1_values]
+            )
+        
+        # Update team2 stats if available
+        if teams[1] in scorecard_data:
+            team2_values = [
+                scorecard_data[teams[1]]['average_strike_rate'],
+                scorecard_data[teams[1]]['average_economy']
+            ]
+            team2_range = f"{columns['team2_sr']}{target_row}:{columns['team2_economy']}{target_row}"
+            update_sheet_with_retry(
+                sheet_service,
+                sheets_config.SPREADSHEET_ID,
+                team2_range,
+                [team2_values]
+            )
+        
+        logger.info(f"Updated team stats for match {match_data['match_number']}")
+        
+    except Exception as e:
+        logger.error(f"Error updating team stats: {str(e)}")
+
 def update_sheet_for_match(match_data):
     """Process a single match and update the sheet with improved error handling"""
     sheet_service = get_sheet_service()
@@ -184,12 +233,15 @@ def update_sheet_for_match(match_data):
         with open(scorecard_path, 'w', encoding='utf-8') as f:
             json.dump(scorecard_data, f, indent=4)
         
-        # Calculate points
+        # Calculate points and get updated scorecard data
         calculate_scores_and_update_sheet(scorecard_path)
         
         # Read the updated scorecard with points
         with open(scorecard_path, 'r', encoding='utf-8') as f:
             scorecard_data = json.load(f)
+        
+        # Update team stats
+        update_team_stats(sheet_service, sheet_mappings, match_data, scorecard_data)
         
         # Process each team
         for team_name, team_info in match_data['teams'].items():

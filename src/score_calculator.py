@@ -376,6 +376,9 @@ def calculate_scores_and_update_sheet(scorecard_path):
                 # Calculate fielding points
                 fielding_points = calculate_fielding_points(stats, player_name)
                 
+                # Calculate POTM points
+                potm_points = calculate_potm_points(stats, player_name)
+                
                 # Update stats with points
                 stats.update({
                     'batting_points': round(batting_points, 2),
@@ -389,7 +392,8 @@ def calculate_scores_and_update_sheet(scorecard_path):
                     'extras_points': round(extras_points, 2),
                     'dots_points': round(dots_points, 2),
                     'fielding_points': round(fielding_points, 2),
-                    'total_points': round(batting_points + bowling_points + fielding_points, 2)
+                    'potm_points': round(potm_points, 2),
+                    'total_points': round(batting_points + bowling_points + fielding_points + potm_points, 2)
                 })
         
         # Save updated scorecard

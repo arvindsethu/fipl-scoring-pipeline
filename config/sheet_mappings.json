@@ -4,6 +4,15 @@
     "player_name_start_row": 4,
     "player_name_end_row": 240
   },
+  "team_stats": {
+    "start_row": 256,
+    "columns": {
+      "team1_sr": "B",
+      "team1_economy": "C",
+      "team2_sr": "D",
+      "team2_economy": "E"
+    }
+  },
   "gameweeks": {
     "1": {
       "played": "D",
