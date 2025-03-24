@@ -211,7 +211,7 @@ def update_scores(request):
                         next_update_str = next_update.strftime('%H:%M UTC')
                         minutes_until = round((next_update - current_time).total_seconds() / 60)
                         logger.info(f"Skipping in-progress match {match_num} - next update in {minutes_until} minutes (at {next_update_str})")
-                        logger.info(current_time.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3] + " GMT")
+                        
         
         # Log skipped matches by category
         if skipped_matches["completed"]:
