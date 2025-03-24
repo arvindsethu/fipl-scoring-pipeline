@@ -290,16 +290,16 @@
                 "Bowler": -25
             },
             "13_to_14.99": {
-                "Batter": -8,
-                "Keeper": -8,
-                "Allrounder": -15,
-                "Bowler": -15
-            },
-            "12_to_12.99": {
                 "Batter": -10,
                 "Keeper": -10,
                 "Allrounder": -20,
                 "Bowler": -20
+            },
+            "12_to_12.99": {
+                "Batter": -8,
+                "Keeper": -8,
+                "Allrounder": -15,
+                "Bowler": -15
             },
             "11_to_11.99": {
                 "Batter": -5,

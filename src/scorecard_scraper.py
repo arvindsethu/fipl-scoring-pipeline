@@ -7,6 +7,7 @@ import logging
 from typing import Dict, Any, List, Optional, Tuple
 import random
 import urllib3
+import sys
 
 # Suppress SSL-related warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -326,6 +327,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         }
 
         if not team_names:
+            logger.error("No teams found in scorecard")
             return {"error": "No teams found in scorecard"}
 
         logger.info("Teams found: %s", team_names)
@@ -371,47 +373,53 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 logger.info("Batting players found: %d", len(player_cells))
                 
                 for player_cell in player_cells:
-                    player_link = player_cell.find('a')
-                    if not player_link:
-                        continue
+                    try:
+                        player_link = player_cell.find('a')
+                        if not player_link:
+                            continue
+                            
+                        player_name = clean_player_name(player_link.text.strip())
+                        logger.debug(f"Processing batting player: {player_name}")
                         
-                    player_name = clean_player_name(player_link.text.strip())
-                    if player_name not in scorecard_data[batting_team]["player_stats"]:
-                        scorecard_data[batting_team]["player_stats"][player_name] = create_default_player_stats()
-                    
-                    row = player_cell.find_parent('tr')
-                    if row:
-                        cells = row.find_all('td')
-                        if len(cells) >= 8:
-                            dismissal_info = cells[1].text.strip()
-                            if bowling_team and dismissal_info and dismissal_info != 'not out':
-                                dismissal_records.append({
-                                    'batsman': player_name,
-                                    'dismissal_text': dismissal_info,
-                                    'batting_team': batting_team,
-                                    'bowling_team': bowling_team
+                        if player_name not in scorecard_data[batting_team]["player_stats"]:
+                            scorecard_data[batting_team]["player_stats"][player_name] = create_default_player_stats()
+                        
+                        row = player_cell.find_parent('tr')
+                        if row:
+                            cells = row.find_all('td')
+                            if len(cells) >= 8:
+                                dismissal_info = cells[1].text.strip()
+                                if bowling_team and dismissal_info and dismissal_info != 'not out':
+                                    dismissal_records.append({
+                                        'batsman': player_name,
+                                        'dismissal_text': dismissal_info,
+                                        'batting_team': batting_team,
+                                        'bowling_team': bowling_team
+                                    })
+                                
+                                strike_rate_text = cells[7].text.strip()
+                                strike_rate = float(f"{float(strike_rate_text) if strike_rate_text != '-' else 0:.2f}")
+                                avg_sr = scorecard_data[batting_team]["average_strike_rate"]
+                                sr_differential = float(f"{((strike_rate - avg_sr) / avg_sr * 100) if avg_sr > 0 else 0.0:.1f}")
+                                
+                                # Get runs scored before deciding did_not_bat status
+                                runs_scored = int(cells[2].text.strip() or 0)
+                                
+                                # Set did_not_bat to "Yes" if player is not out and has 0 runs
+                                did_not_bat = "Yes" if runs_scored == 0 and dismissal_info == "not out" else "No"
+                                
+                                scorecard_data[batting_team]["player_stats"][player_name].update({
+                                    "runs_scored": runs_scored,
+                                    "balls_faced": int(cells[3].text.strip() or 0),
+                                    "fours": int(cells[5].text.strip() or 0),
+                                    "sixes": int(cells[6].text.strip() or 0),
+                                    "strike_rate": strike_rate,
+                                    "sr_differential": sr_differential,
+                                    "did_not_bat": did_not_bat
                                 })
-                            
-                            strike_rate_text = cells[7].text.strip()
-                            strike_rate = float(f"{float(strike_rate_text) if strike_rate_text != '-' else 0:.2f}")
-                            avg_sr = scorecard_data[batting_team]["average_strike_rate"]
-                            sr_differential = float(f"{((strike_rate - avg_sr) / avg_sr * 100) if avg_sr > 0 else 0.0:.1f}")
-                            
-                            # Get runs scored before deciding did_not_bat status
-                            runs_scored = int(cells[2].text.strip() or 0)
-                            
-                            # Set did_not_bat to "Yes" if player is not out and has 0 runs
-                            did_not_bat = "Yes" if runs_scored == 0 and dismissal_info == "not out" else "No"
-                            
-                            scorecard_data[batting_team]["player_stats"][player_name].update({
-                                "runs_scored": runs_scored,
-                                "balls_faced": int(cells[3].text.strip() or 0),
-                                "fours": int(cells[5].text.strip() or 0),
-                                "sixes": int(cells[6].text.strip() or 0),
-                                "strike_rate": strike_rate,
-                                "sr_differential": sr_differential,
-                                "did_not_bat": did_not_bat
-                            })
+                    except Exception as e:
+                        logger.error(f"Error processing batting player: {str(e)}")
+                        continue
 
                 # Process did not bat
                 dnb_row = batting_table.find('tr', class_='!ds-border-b-0')
@@ -420,9 +428,14 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                     if dnb_div and 'bat' in dnb_div.text:
                         dnb_players = dnb_div.find_all('a')
                         for player in dnb_players:
-                            player_name = clean_player_name(player.text.strip())
-                            if player_name not in scorecard_data[batting_team]["player_stats"]:
-                                scorecard_data[batting_team]["player_stats"][player_name] = create_default_player_stats()
+                            try:
+                                player_name = clean_player_name(player.text.strip())
+                                logger.debug(f"Processing DNB player: {player_name}")
+                                if player_name not in scorecard_data[batting_team]["player_stats"]:
+                                    scorecard_data[batting_team]["player_stats"][player_name] = create_default_player_stats()
+                            except Exception as e:
+                                logger.error(f"Error processing DNB player: {str(e)}")
+                                continue
 
             # Process bowling - only if we have a bowling team
             if bowling_team:
@@ -430,82 +443,102 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 if bowling_table:
                     bowling_rows = bowling_table.find_all('tr')
                     for row in bowling_rows:
-                        cells = row.find_all('td')
-                        if not (cells and len(cells) >= 11):
-                            continue
+                        try:
+                            cells = row.find_all('td')
+                            if not (cells and len(cells) >= 11):
+                                continue
+                                
+                            player_link = cells[0].find('a')
+                            if not player_link:
+                                continue
+                                
+                            player_name = clean_player_name(player_link.text.strip())
+                            logger.debug(f"Processing bowling player: {player_name}")
                             
-                        player_link = cells[0].find('a')
-                        if not player_link:
-                            continue
+                            if player_name not in scorecard_data[bowling_team]["player_stats"]:
+                                scorecard_data[bowling_team]["player_stats"][player_name] = create_default_player_stats()
                             
-                        player_name = clean_player_name(player_link.text.strip())
-                        if player_name not in scorecard_data[bowling_team]["player_stats"]:
-                            scorecard_data[bowling_team]["player_stats"][player_name] = create_default_player_stats()
-                        
-                        economy = float(f"{float(cells[5].text.strip() or 0):.2f}")
-                        avg_econ = float(f"{scorecard_data[bowling_team]['average_economy']:.2f}")
-                        econ_differential = float(f"{((economy - avg_econ) / avg_econ * 100) if avg_econ > 0 else 0.0:.1f}")
-                        
-                        bowling_stats = {
-                            "overs": float(cells[1].text.strip() or 0),
-                            "maiden": int(cells[2].text.strip() or 0),
-                            "wickets": int(cells[4].text.strip() or 0),
-                            "dots": int(cells[6].text.strip() or 0),
-                            "wides": int(cells[9].text.strip() or 0),
-                            "no_balls": int(cells[10].text.strip() or 0),
-                            "economy": float(f"{economy:.2f}"),
-                            "economy_differential": econ_differential
-                        }
-                        
-                        scorecard_data[bowling_team]["player_stats"][player_name].update(bowling_stats)
+                            economy = float(f"{float(cells[5].text.strip() or 0):.2f}")
+                            avg_econ = float(f"{scorecard_data[bowling_team]['average_economy']:.2f}")
+                            econ_differential = float(f"{((economy - avg_econ) / avg_econ * 100) if avg_econ > 0 else 0.0:.1f}")
+                            
+                            bowling_stats = {
+                                "overs": float(cells[1].text.strip() or 0),
+                                "maiden": int(cells[2].text.strip() or 0),
+                                "wickets": int(cells[4].text.strip() or 0),
+                                "dots": int(cells[6].text.strip() or 0),
+                                "wides": int(cells[9].text.strip() or 0),
+                                "no_balls": int(cells[10].text.strip() or 0),
+                                "economy": float(f"{economy:.2f}"),
+                                "economy_differential": econ_differential
+                            }
+                            
+                            scorecard_data[bowling_team]["player_stats"][player_name].update(bowling_stats)
+                        except Exception as e:
+                            logger.error(f"Error processing bowling player: {str(e)}")
+                            continue
 
         # Process dismissals - only if we have bowling team records
         for record in dismissal_records:
-            if record['bowling_team'] not in scorecard_data:
-                continue
-                
-            fielders = parse_dismissal_text(record['dismissal_text'])
-            bowling_team_players = list(scorecard_data[record['bowling_team']]["player_stats"].keys())
-            
-            for fielder_name in fielders:
-                is_sub = ('sub' in record['dismissal_text'] and fielder_name in record['dismissal_text'].split('sub')[1])
-                matched_name, is_new, error_msg = find_matching_player(
-                    fielder_name, 
-                    record['bowling_team'],
-                    bowling_team_players,
-                    scorecard_data[record['bowling_team']]["player_stats"]
-                )
-                
-                if matched_name:
-                    if is_new:
-                        scorecard_data[record['bowling_team']]["player_stats"][matched_name] = create_default_player_stats()
-                        scorecard_data[record['bowling_team']]["player_stats"][matched_name]["is_sub"] = True
+            try:
+                if record['bowling_team'] not in scorecard_data:
+                    continue
                     
-                    if "c & b" in record['dismissal_text']:
-                        scorecard_data[record['bowling_team']]["player_stats"][matched_name]["catches"] += 1
-                    elif record['dismissal_text'].startswith("st "):
-                        scorecard_data[record['bowling_team']]["player_stats"][matched_name]["stumping"] += 1
-                    elif record['dismissal_text'].startswith("c "):
-                        scorecard_data[record['bowling_team']]["player_stats"][matched_name]["catches"] += 1
-                    elif "run out" in record['dismissal_text']:
-                        points_per_fielder = 1.0 / len(fielders) if fielders else 0
-                        scorecard_data[record['bowling_team']]["player_stats"][matched_name]["run_outs"] += points_per_fielder
-                else:
-                    error_context = f" in dismissal: {record['dismissal_text']}"
-                    if len(fielders) > 1:
-                        error_context += f" (multi-fielder dismissal with: {[f for f in fielders if f != fielder_name]})"
-                    logger.warning(f"Failed to match '{fielder_name}': {error_msg}{error_context}\n")
+                fielders = parse_dismissal_text(record['dismissal_text'])
+                bowling_team_players = list(scorecard_data[record['bowling_team']]["player_stats"].keys())
+                
+                for fielder_name in fielders:
+                    try:
+                        is_sub = ('sub' in record['dismissal_text'] and fielder_name in record['dismissal_text'].split('sub')[1])
+                        logger.debug(f"Processing fielder: {fielder_name} in dismissal: {record['dismissal_text']}")
+                        matched_name, is_new, error_msg = find_matching_player(
+                            fielder_name, 
+                            record['bowling_team'],
+                            bowling_team_players,
+                            scorecard_data[record['bowling_team']]["player_stats"]
+                        )
+                        
+                        if matched_name:
+                            # Initialize player stats if they don't exist (especially for subs)
+                            if matched_name not in scorecard_data[record['bowling_team']]["player_stats"]:
+                                scorecard_data[record['bowling_team']]["player_stats"][matched_name] = create_default_player_stats()
+                                scorecard_data[record['bowling_team']]["player_stats"][matched_name]["is_sub"] = True
+                            
+                            if "c & b" in record['dismissal_text']:
+                                scorecard_data[record['bowling_team']]["player_stats"][matched_name]["catches"] += 1
+                            elif record['dismissal_text'].startswith("st "):
+                                scorecard_data[record['bowling_team']]["player_stats"][matched_name]["stumping"] += 1
+                            elif record['dismissal_text'].startswith("c "):
+                                scorecard_data[record['bowling_team']]["player_stats"][matched_name]["catches"] += 1
+                            elif "run out" in record['dismissal_text']:
+                                points_per_fielder = 1.0 / len(fielders) if fielders else 0
+                                scorecard_data[record['bowling_team']]["player_stats"][matched_name]["run_outs"] += points_per_fielder
+                        else:
+                            error_context = f" in dismissal: {record['dismissal_text']}"
+                            if len(fielders) > 1:
+                                error_context += f" (multi-fielder dismissal with: {[f for f in fielders if f != fielder_name]})"
+                            logger.warning(f"Failed to match '{fielder_name}': {error_msg}{error_context}\n")
+                    except Exception as e:
+                        logger.error(f"Error processing fielder {fielder_name}: {str(e)}")
+                        continue
+            except Exception as e:
+                logger.error(f"Error processing dismissal record: {str(e)}")
+                continue
 
         # Player of the Match
-        potm_header = soup.find('div', class_='ds-text-eyebrow-xs ds-uppercase ds-text-typo-mid2', string='Player Of The Match')
-        if potm_header:
-            potm_container = potm_header.find_next('div')
-            if potm_container and (potm_link := potm_container.find('a')):
-                potm_name = clean_player_name(potm_link.text.strip())
-                for team in team_names:
-                    if potm_name in scorecard_data[team]["player_stats"]:
-                        scorecard_data[team]["player_stats"][potm_name]["potm"] = "Yes"
-                        break
+        try:
+            potm_header = soup.find('div', class_='ds-text-eyebrow-xs ds-uppercase ds-text-typo-mid2', string='Player Of The Match')
+            if potm_header:
+                potm_container = potm_header.find_next('div')
+                if potm_container and (potm_link := potm_container.find('a')):
+                    potm_name = clean_player_name(potm_link.text.strip())
+                    logger.debug(f"Processing POTM: {potm_name}")
+                    for team in team_names:
+                        if potm_name in scorecard_data[team]["player_stats"]:
+                            scorecard_data[team]["player_stats"][potm_name]["potm"] = "Yes"
+                            break
+        except Exception as e:
+            logger.error(f"Error processing Player of the Match: {str(e)}")
 
         # Format floating point values
         for team in scorecard_data:
@@ -513,19 +546,24 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
             scorecard_data[team]["average_strike_rate"] = float(f"{scorecard_data[team]['average_strike_rate']:.2f}")
             
             for player in scorecard_data[team]["player_stats"]:
-                stats = scorecard_data[team]["player_stats"][player]
-                formatted_stats = {
-                    "strike_rate": float(f"{stats['strike_rate']:.2f}"),
-                    "sr_differential": float(f"{stats['sr_differential']:.1f}"),
-                    "economy": float(f"{stats['economy']:.2f}"),
-                    "economy_differential": float(f"{stats['economy_differential']:.1f}")
-                }
-                stats.update(formatted_stats)
+                try:
+                    stats = scorecard_data[team]["player_stats"][player]
+                    formatted_stats = {
+                        "strike_rate": float(f"{stats['strike_rate']:.2f}"),
+                        "sr_differential": float(f"{stats['sr_differential']:.1f}"),
+                        "economy": float(f"{stats['economy']:.2f}"),
+                        "economy_differential": float(f"{stats['economy_differential']:.1f}")
+                    }
+                    stats.update(formatted_stats)
+                except Exception as e:
+                    logger.error(f"Error formatting stats for player {player}: {str(e)}")
+                    continue
 
         return scorecard_data
 
     except Exception as e:
-        return {"error": f"Error parsing scorecard: {str(e)}"}
+        logger.error(f"Critical error processing scorecard: {str(e)}")
+        return {"error": "Failed to process scorecard"}
 
 def test_player_matching():
     """Test function to verify player matching logic"""
