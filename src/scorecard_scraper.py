@@ -20,9 +20,15 @@ TMP_DIR = '/tmp'
 # Configure logging
 logger = logging.getLogger(__name__)
 
-def clean_player_name(name: str) -> str:
-    """Clean player name by removing special characters and normalizing format"""
-    return re.sub(r'\s*[(]c[)]|\s*[†](?!\w)|\s*,', '', name).replace('\u2019', "'").strip()
+def clean_player_name(name: str) -> Tuple[str, bool]:
+    """Clean player name by removing special characters and normalizing format.
+    Returns a tuple of (cleaned_name, is_wicketkeeper)"""
+    is_wicketkeeper = '†' in name
+    if is_wicketkeeper:
+        name = re.sub(r'†', '', name)
+
+    cleaned = re.sub(r'\s*[(]c[)]|\s*[†](?!\w)|\s*,', '', name).replace('\u2019', "'").strip()
+    return cleaned, is_wicketkeeper
 
 def create_default_player_stats() -> Dict[str, Any]:
     """Create a dictionary with default player statistics"""
@@ -77,7 +83,7 @@ def normalize_team_name(team_name: str) -> str:
     # For other teams, just capitalize words
     return ' '.join(word.capitalize() for word in team_name.split())
 
-def find_matching_player(name: str, team_name: str, existing_players: List[str], players_data: Dict[str, Any]) -> Tuple[Optional[str], bool, Optional[str]]:
+def find_matching_player(name: str, team_name: str, existing_players: List[str], players_data: Dict[str, Any], is_wicketkeeper: bool = False) -> Tuple[Optional[str], bool, Optional[str]]:
     """Find matching player from players.json data"""
     logger = logging.getLogger(__name__)
     
@@ -129,28 +135,53 @@ def find_matching_player(name: str, team_name: str, existing_players: List[str],
         return last_name_matches[0], False, None
     
     # Multiple last name matches - try to resolve
-    if len(last_name_matches) > 1:
-        logger.warning("Multiple matches found for '%s' in %s: %s", name, team_name, last_name_matches)
-        
+    if len(last_name_matches) > 1:        
         # Only try first letter match if the original name has multiple parts
         if has_multiple_parts:
             first_letter_matches = [p for p in last_name_matches if p.lower()[0] == first_letter]
             if len(first_letter_matches) == 1:
+                logger.info(f"Resolved multiple match for '{name}' using first letter match: {first_letter_matches[0]}")
                 return first_letter_matches[0], False, None
             
         # Try existing players
         if existing_players:
             matches_in_existing = [p for p in last_name_matches if p in existing_players]
             if len(matches_in_existing) == 1:
+                logger.info(f"Resolved multiple match for '{name}' using existing player match: {matches_in_existing[0]}")
                 return matches_in_existing[0], False, None
+        
+        # Try keeper status matching
+        if is_wicketkeeper is not None:  # Only try if we know the keeper status
+            # Get roles for all matching players
+            matching_players_with_roles = [
+                (p, next((pl['role'] for pl in all_players if pl['name'] == p), None))
+                for p in last_name_matches
+            ]
+            
+            if is_wicketkeeper:
+                # Look for keepers
+                keeper_matches = [p for p, role in matching_players_with_roles if role == 'Keeper']
+                if len(keeper_matches) == 1:
+                    logger.info(f"Resolved multiple match for '{name}' using keeper status match: {keeper_matches[0]}")
+                    return keeper_matches[0], False, None
+                elif not keeper_matches:
+                    logger.warning(f"WARNING: Unexpected: Player marked as keeper but no keeper matches found for '{name}'")
+            else:
+                # Look for non-keepers
+                non_keeper_matches = [p for p, role in matching_players_with_roles if role != 'Keeper']
+                if len(non_keeper_matches) == 1:
+                    logger.info(f"Resolved multiple match for '{name}' using non-keeper status match: {non_keeper_matches[0]}")
+                    return non_keeper_matches[0], False, None
+                elif not non_keeper_matches:
+                    logger.warning(f"WARNING: Unexpected: Player not marked as keeper but all matches are keepers for '{name}'")
         
         return None, False, f"Multiple unresolved last name matches: {last_name_matches}"
     
     logger.warning("No matches found for '%s' in %s", name, team_name)
     return None, False, f"No match found for: {name}"
 
-def parse_dismissal_text(dismissal_text: str) -> List[str]:
-    """Parse dismissal text and return list of fielder names involved"""
+def parse_dismissal_text(dismissal_text: str) -> List[Tuple[str, bool]]:
+    """Parse dismissal text and return list of (fielder_name, is_wicketkeeper) tuples"""
     if not dismissal_text:
         return []
     
@@ -168,7 +199,6 @@ def parse_dismissal_text(dismissal_text: str) -> List[str]:
             keeper_name = sub_match.group(1) if sub_match else None
         else:
             keeper_name = dismissal_text.split(' b ')[0][3:].strip()
-            keeper_name = re.sub(r'†', '', keeper_name)
         
         if keeper_name:
             return [clean_player_name(keeper_name)]
@@ -180,8 +210,8 @@ def parse_dismissal_text(dismissal_text: str) -> List[str]:
             sub_match = re.search(r'sub\s*\(([^)]+)\)', dismissal_text)
             catcher = sub_match.group(1) if sub_match else None
         else:
+            # Extract the catcher name with the † symbol if present
             catcher = dismissal_text.split(' b ')[0][2:].strip()
-            catcher = re.sub(r'†', '', catcher)
         
         if catcher:
             return [clean_player_name(catcher)]
@@ -196,10 +226,9 @@ def parse_dismissal_text(dismissal_text: str) -> List[str]:
             cleaned_fielders = []
             for fielder in fielders:
                 fielder = re.sub(r'sub\s*\[(.*?)\]', r'\1', fielder)
-                fielder = re.sub(r'†', '', fielder)
-                fielder = clean_player_name(fielder)
-                if fielder:
-                    cleaned_fielders.append(fielder)
+                cleaned = clean_player_name(fielder)
+                if cleaned[0]:  # Only add if name is not empty
+                    cleaned_fielders.append(cleaned)
             
             return cleaned_fielders
 
@@ -378,7 +407,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         if not player_link:
                             continue
                             
-                        player_name = clean_player_name(player_link.text.strip())
+                        player_name, is_wicketkeeper = clean_player_name(player_link.text.strip())
                         logger.debug(f"Processing batting player: {player_name}")
                         
                         if player_name not in scorecard_data[batting_team]["player_stats"]:
@@ -429,7 +458,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         dnb_players = dnb_div.find_all('a')
                         for player in dnb_players:
                             try:
-                                player_name = clean_player_name(player.text.strip())
+                                player_name, _ = clean_player_name(player.text.strip())
                                 logger.debug(f"Processing DNB player: {player_name}")
                                 if player_name not in scorecard_data[batting_team]["player_stats"]:
                                     scorecard_data[batting_team]["player_stats"][player_name] = create_default_player_stats()
@@ -452,7 +481,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             if not player_link:
                                 continue
                                 
-                            player_name = clean_player_name(player_link.text.strip())
+                            player_name, _ = clean_player_name(player_link.text.strip())
                             logger.debug(f"Processing bowling player: {player_name}")
                             
                             if player_name not in scorecard_data[bowling_team]["player_stats"]:
@@ -487,7 +516,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 fielders = parse_dismissal_text(record['dismissal_text'])
                 bowling_team_players = list(scorecard_data[record['bowling_team']]["player_stats"].keys())
                 
-                for fielder_name in fielders:
+                for fielder_name, is_wicketkeeper in fielders:
                     try:
                         is_sub = ('sub' in record['dismissal_text'] and fielder_name in record['dismissal_text'].split('sub')[1])
                         logger.debug(f"Processing fielder: {fielder_name} in dismissal: {record['dismissal_text']}")
@@ -495,7 +524,8 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             fielder_name, 
                             record['bowling_team'],
                             bowling_team_players,
-                            scorecard_data[record['bowling_team']]["player_stats"]
+                            scorecard_data[record['bowling_team']]["player_stats"],
+                            is_wicketkeeper
                         )
                         
                         if matched_name:
@@ -517,7 +547,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             error_context = f" in dismissal: {record['dismissal_text']}"
                             if len(fielders) > 1:
                                 error_context += f" (multi-fielder dismissal with: {[f for f in fielders if f != fielder_name]})"
-                            logger.warning(f"Failed to match '{fielder_name}': {error_msg}{error_context}\n")
+                            logger.warning(f"WARNING: Failed to match '{fielder_name}': {error_msg}{error_context}\n")
                     except Exception as e:
                         logger.error(f"Error processing fielder {fielder_name}: {str(e)}")
                         continue
@@ -531,7 +561,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
             if potm_header:
                 potm_container = potm_header.find_next('div')
                 if potm_container and (potm_link := potm_container.find('a')):
-                    potm_name = clean_player_name(potm_link.text.strip())
+                    potm_name, _ = clean_player_name(potm_link.text.strip())
                     logger.debug(f"Processing POTM: {potm_name}")
                     for team in team_names:
                         if potm_name in scorecard_data[team]["player_stats"]:
