@@ -285,7 +285,6 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
     for attempt in range(max_retries):
         try:
             headers = get_enhanced_headers()  # This will get a random user agent each time
-            logger.info(f"Attempt {attempt + 1}/{max_retries} to fetch scorecard")
             
             response = requests.get(
                 url,
@@ -293,6 +292,10 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 timeout=30,
                 verify=False
             )
+            
+            # Extract Safari version from the user agent that was used
+            safari_version = headers['User-Agent'].split('Version/')[1].split()[0]
+            logger.info(f"Attempt {attempt + 1}/{max_retries} to fetch scorecard with Safari {safari_version}")
             
             if response.status_code == 403:
                 logger.error(f"Access denied (403) on attempt {attempt + 1}/{max_retries}")
@@ -566,6 +569,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                     for team in team_names:
                         if potm_name in scorecard_data[team]["player_stats"]:
                             scorecard_data[team]["player_stats"][potm_name]["potm"] = "Yes"
+                            logger.info(f"Player of the Match found: {potm_name}")
                             break
         except Exception as e:
             logger.error(f"Error processing Player of the Match: {str(e)}")

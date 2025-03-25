@@ -211,7 +211,8 @@ def update_team_stats(sheet_service, sheet_mappings, match_data, scorecard_data)
                 [team2_values]
             )
         
-        logger.info(f"Updated team stats for match {match_data['match_number']}")
+        if teams[0] in scorecard_data or teams[1] in scorecard_data:
+            logger.info(f"Updated team stats for match {match_data['match_number']}")
         
     except Exception as e:
         logger.error(f"Error updating team stats: {str(e)}")
@@ -227,6 +228,11 @@ def update_sheet_for_match(match_data, scorecard_data=None):
         if scorecard_data is None:
             # Scrape match data
             scorecard_data = scrape_scorecard(match_data['url'])
+            
+            # If scraping failed after all retries, return False immediately
+            if isinstance(scorecard_data, dict) and 'error' in scorecard_data:
+                logger.error(f"Failed to scrape match {match_data['match_number']} after all retries")
+                return False
             
             # Save scorecard data to temp file
             scorecard_path = os.path.join(TMP_DIR, f"scorecard_{match_data['match_number']}.json")
