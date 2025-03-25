@@ -232,7 +232,7 @@ def update_sheet_for_match(match_data, scorecard_data=None):
             # If scraping failed after all retries, return False immediately
             if isinstance(scorecard_data, dict) and 'error' in scorecard_data:
                 logger.error(f"Failed to scrape match {match_data['match_number']} after all retries")
-                return False
+                return False, scorecard_data.get('error', 'Unknown error')
             
             # Save scorecard data to temp file
             scorecard_path = os.path.join(TMP_DIR, f"scorecard_{match_data['match_number']}.json")
@@ -313,11 +313,11 @@ def update_sheet_for_match(match_data, scorecard_data=None):
             except Exception as e:
                 logger.warning(f"Could not remove temporary file: {str(e)}")
         
-        return True
+        return True, None
         
     except Exception as e:
         logger.error(f"Error updating match {match_data['match_number']}: {str(e)}")
-        return False
+        return False, str(e)
 
 def main(match_data=None):
     """Main function to process a specific match or all matches"""
@@ -330,9 +330,11 @@ def main(match_data=None):
             if should_update:
                 logger.info(f"Processing match {match_data['match_number']} ({match_data['status']} -> {new_status})")
                 try:
-                    if update_sheet_for_match(match_data):
+                    success, error = update_sheet_for_match(match_data)
+                    if success:
                         match_data = update_match_status(match_data, new_status)
                         return match_data
+                    return None  # Return None on failure
                 except Exception as e:
                     logger.error(f"Error processing match {match_data['match_number']}: {str(e)}")
                     raise
@@ -348,7 +350,8 @@ def main(match_data=None):
                 if should_update:
                     logger.info(f"Processing match {match['match_number']} ({match['status']} -> {new_status})")
                     try:
-                        if update_sheet_for_match(match):
+                        success, error = update_sheet_for_match(match)
+                        if success:
                             match = update_match_status(match, new_status)
                     except Exception as e:
                         logger.error(f"Error processing match {match['match_number']}: {str(e)}")
