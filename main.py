@@ -81,7 +81,7 @@ def get_update_frequency(match_start_time, current_time):
     hours_elapsed = (current_time - match_start_time).total_seconds() / 3600
     
     if hours_elapsed <= 5:
-        return 14  # First 4 hours: every 15 minutes
+        return 14  # First 5 hours: every 15 minutes
     else:
         return None  # Match should be completed
 

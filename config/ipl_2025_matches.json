@@ -29,8 +29,8 @@
         }
       },
       "start_time": "2025-03-23T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-23T14:55:02.018399Z"
     },
     {
       "match_number": 3,
@@ -45,8 +45,8 @@
         }
       },
       "start_time": "2025-03-23T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-23T18:55:01.341153Z"
     },
     {
       "match_number": 4,
@@ -61,8 +61,8 @@
         }
       },
       "start_time": "2025-03-24T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-24T18:45:06.024205Z"
     },
     {
       "match_number": 5,
@@ -77,8 +77,8 @@
         }
       },
       "start_time": "2025-03-25T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-25T18:55:01.970348Z"
     },
     {
       "match_number": 6,
@@ -93,8 +93,8 @@
         }
       },
       "start_time": "2025-03-26T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-26T18:55:01.213058Z"
     },
     {
       "match_number": 7,
@@ -109,8 +109,8 @@
         }
       },
       "start_time": "2025-03-27T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-27T18:55:01.547372Z"
     },
     {
       "match_number": 8,
@@ -125,8 +125,8 @@
         }
       },
       "start_time": "2025-03-28T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-28T18:55:05.892992Z"
     },
     {
       "match_number": 9,
@@ -141,8 +141,8 @@
         }
       },
       "start_time": "2025-03-29T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-29T18:55:05.485378Z"
     },
     {
       "match_number": 10,
@@ -157,8 +157,8 @@
         }
       },
       "start_time": "2025-03-30T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-30T14:55:01.968785Z"
     },
     {
       "match_number": 11,
@@ -173,8 +173,8 @@
         }
       },
       "start_time": "2025-03-30T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-30T18:55:01.665480Z"
     },
     {
       "match_number": 12,
@@ -189,8 +189,8 @@
         }
       },
       "start_time": "2025-03-31T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-03-31T18:55:01.518863Z"
     },
     {
       "match_number": 13,
@@ -205,8 +205,8 @@
         }
       },
       "start_time": "2025-04-01T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "in_progress",
+      "last_update": "2025-04-01T14:25:05.362596Z"
     },
     {
       "match_number": 14,
@@ -290,23 +290,7 @@
     },
     {
       "match_number": 19,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/kolkata-knight-riders-vs-lucknow-super-giants-19th-match-1473456/full-scorecard",
-      "gameweek": 4,
-      "teams": {
-        "Kolkata Knight Riders": {
-          "gameweek_match": 1
-        },
-        "Lucknow Super Giants": {
-          "gameweek_match": 2
-        }
-      },
-      "start_time": "2025-04-06T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 20,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/sunrisers-hyderabad-vs-gujarat-titans-20th-match-1473457/full-scorecard",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/sunrisers-hyderabad-vs-gujarat-titans-19th-match-1473457/full-scorecard",
       "gameweek": 4,
       "teams": {
         "Sunrisers Hyderabad": {
@@ -321,18 +305,34 @@
       "last_update": null
     },
     {
-      "match_number": 21,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/mumbai-indians-vs-royal-challengers-bengaluru-21st-match-1473458/full-scorecard",
-      "gameweek": 5,
+      "match_number": 20,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/mumbai-indians-vs-royal-challengers-bengaluru-20th-match-1473458/full-scorecard",
+      "gameweek": 4,
       "teams": {
         "Mumbai Indians": {
-          "gameweek_match": 1
+          "gameweek_match": 2
         },
         "Royal Challengers Bengaluru": {
           "gameweek_match": 1
         }
       },
       "start_time": "2025-04-07T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 21,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/kolkata-knight-riders-vs-lucknow-super-giants-21st-match-1473456/full-scorecard",
+      "gameweek": 5,
+      "teams": {
+        "Kolkata Knight Riders": {
+          "gameweek_match": 1
+        },
+        "Lucknow Super Giants": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-04-06T10:07:00Z",
       "status": "not_started",
       "last_update": null
     },
@@ -374,7 +374,7 @@
       "gameweek": 5,
       "teams": {
         "Royal Challengers Bengaluru": {
-          "gameweek_match": 2
+          "gameweek_match": 1
         },
         "Delhi Capitals": {
           "gameweek_match": 1
@@ -393,7 +393,7 @@
           "gameweek_match": 2
         },
         "Kolkata Knight Riders": {
-          "gameweek_match": 1
+          "gameweek_match": 2
         }
       },
       "start_time": "2025-04-11T14:07:00Z",
