@@ -71,10 +71,12 @@ def process_url(url):
         print(f"Error: {str(e)}")
         raise
 
-def process_match(match_number):
+def process_match(match_number, dry_run=False):
     """Process a match by number with full pipeline including sheet updates"""
     print(f"\nProcessing match number: {match_number}")
     print("Mode: Full pipeline (including sheet updates)")
+    if dry_run:
+        print("DRY RUN: Sheet updates will be skipped")
     
     try:
         # Load match data
@@ -98,9 +100,12 @@ def process_match(match_number):
         with open(temp_file, 'r', encoding='utf-8') as f:
             scorecard_data = json.load(f)
         
-        # Update sheet
-        print("Updating sheet...")
-        update_sheet_for_match(match_data, scorecard_data)
+        # Update sheet only if not in dry run mode
+        if not dry_run:
+            print("Updating sheet...")
+            update_sheet_for_match(match_data, scorecard_data)
+        else:
+            print("Skipping sheet update (dry run)")
         
         print(f"\nSuccess! Output saved to: {temp_file}")
         
@@ -114,13 +119,16 @@ def main():
     group.add_argument('--match-number', type=int, help='Match number from ipl_2025_matches.json')
     group.add_argument('--url', type=str, help='Direct ESPNCricinfo scorecard URL')
     
+    # Add dry run flag
+    parser.add_argument('--dry', action='store_true', help='Run in dry mode (skip sheet updates)')
+    
     args = parser.parse_args()
     
     # Create outputs directory if it doesn't exist
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     if args.match_number:
-        process_match(args.match_number)
+        process_match(args.match_number, dry_run=args.dry)
     else:
         # Strip quotes if present
         url = args.url.strip('"\'')

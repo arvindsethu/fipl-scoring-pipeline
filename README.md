@@ -29,11 +29,16 @@ For testing or demo purposes, you can run the pipeline manually:
 # Process a specific match (with sheet updates)
 python manual_tools/scripts/run_pipeline.py --match-number 5
 
+# Process a specific match in dry run mode (no sheet updates)
+python manual_tools/scripts/run_pipeline.py --match-number 5 --dry
+
 # Process any scorecard URL (no sheet updates)
 python manual_tools/scripts/run_pipeline.py --url https://www.espncricinfo.com/series/...
 ```
 
 The output will be saved to `manual_tools/outputs/scorecard.json`
+
+Note: Dry run mode allows you to test match processing without affecting the live Google Sheets data.
 
 ## System Architecture
 

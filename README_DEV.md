@@ -28,7 +28,7 @@
 
 ### 5. Manual Testing Tools (`manual_tools/`)
 - Local testing and demonstration utilities
-- Two modes of operation:
+- Three modes of operation:
   1. Match Number Mode:
      ```bash
      python manual_tools/scripts/run_pipeline.py --match-number <number>
@@ -44,6 +44,14 @@
      - Processes any ESPNCricinfo scorecard URL
      - Runs scraper and calculator only (no sheet updates)
      - Useful for quick testing and demonstrations
+
+  3. Dry Run Mode:
+     ```bash
+     python manual_tools/scripts/run_pipeline.py --match-number <number> --dry
+     ```
+     - Uses match data from `ipl_2025_matches.json`
+     - Runs complete pipeline but skips sheet updates
+     - Useful for testing specific matches without affecting live data
 
 - Output is always saved to `manual_tools/outputs/scorecard.json`
 - Handles quoted and unquoted URLs
