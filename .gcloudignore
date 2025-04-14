@@ -13,7 +13,7 @@ demo.log
 manual_tools/
 README.md
 README_DEV.md
-!config/
+config/ipl_2025_matches.json
 !src/
 !requirements.txt
 !main.py
