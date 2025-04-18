@@ -71,6 +71,11 @@
       "role": "Batter"
     },
     {
+      "name": "Dewald Brevis",
+      "team": "Chennai Superkings",
+      "role": "Batter"
+    },
+    {
       "name": "Matheesha Pathirana",
       "team": "Chennai Superkings",
       "role": "Bowler"
@@ -297,6 +302,10 @@
     },
     {
       "name": "Nishant Sindhu",
+      "team": "Gujarat Titans",
+      "role": "Allrounder"
+    },{
+      "name": "Dasun Shanaka",
       "team": "Gujarat Titans",
       "role": "Allrounder"
     },

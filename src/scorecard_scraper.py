@@ -323,7 +323,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
         scorecard_data: Dict[str, Any] = {}
 
         # Extract team names and initialize data structure
-        innings_divs = soup.find_all('div', class_='ds-rounded-lg')
+        innings_divs = soup.find_all('div', class_='ds-rounded-lg')[:2]
         team_names = []
         
         # First try to get teams from match header
