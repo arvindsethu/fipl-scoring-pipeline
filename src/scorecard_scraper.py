@@ -544,7 +544,9 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                             elif record['dismissal_text'].startswith("c "):
                                 scorecard_data[record['bowling_team']]["player_stats"][matched_name]["catches"] += 1
                             elif "run out" in record['dismissal_text']:
-                                points_per_fielder = 1.0 / len(fielders) if fielders else 0
+                                # For single fielder run out, give full credit
+                                # For multiple fielders, each gets 0.5 regardless of number of fielders
+                                points_per_fielder = 1.0 if len(fielders) == 1 else 0.5
                                 scorecard_data[record['bowling_team']]["player_stats"][matched_name]["run_outs"] += points_per_fielder
                         else:
                             error_context = f" in dismissal: {record['dismissal_text']}"
