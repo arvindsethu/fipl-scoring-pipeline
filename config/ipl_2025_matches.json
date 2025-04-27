@@ -205,8 +205,8 @@
         }
       },
       "start_time": "2025-04-01T14:07:00Z",
-      "status": "in_progress",
-      "last_update": "2025-04-01T14:25:05.362596Z"
+      "status": "completed",
+      "last_update": "2025-04-01T18:55:05.204446Z"
     },
     {
       "match_number": 14,
@@ -221,8 +221,8 @@
         }
       },
       "start_time": "2025-04-02T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-02T18:55:02.009365Z"
     },
     {
       "match_number": 15,
@@ -237,8 +237,8 @@
         }
       },
       "start_time": "2025-04-03T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-03T18:55:05.619662Z"
     },
     {
       "match_number": 16,
@@ -253,8 +253,8 @@
         }
       },
       "start_time": "2025-04-04T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-04T18:55:01.925141Z"
     },
     {
       "match_number": 17,
@@ -269,8 +269,8 @@
         }
       },
       "start_time": "2025-04-05T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-05T14:55:01.934193Z"
     },
     {
       "match_number": 18,
@@ -285,8 +285,8 @@
         }
       },
       "start_time": "2025-04-05T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-05T18:55:01.082282Z"
     },
     {
       "match_number": 19,
@@ -301,8 +301,8 @@
         }
       },
       "start_time": "2025-04-06T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-06T18:55:05.769865Z"
     },
     {
       "match_number": 20,
@@ -317,8 +317,8 @@
         }
       },
       "start_time": "2025-04-07T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-07T18:55:01.288417Z"
     },
     {
       "match_number": 21,
@@ -333,7 +333,7 @@
         }
       },
       "start_time": "2025-04-06T10:07:00Z",
-      "status": "not_started",
+      "status": "completed",
       "last_update": null
     },
     {
@@ -349,8 +349,8 @@
         }
       },
       "start_time": "2025-04-08T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-08T18:50:01.757179Z"
     },
     {
       "match_number": 23,
@@ -365,8 +365,8 @@
         }
       },
       "start_time": "2025-04-09T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-09T18:45:01.973390Z"
     },
     {
       "match_number": 24,
@@ -381,8 +381,8 @@
         }
       },
       "start_time": "2025-04-10T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-10T18:55:01.408786Z"
     },
     {
       "match_number": 25,
@@ -397,8 +397,8 @@
         }
       },
       "start_time": "2025-04-11T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-11T18:55:01.615451Z"
     },
     {
       "match_number": 26,
@@ -413,8 +413,8 @@
         }
       },
       "start_time": "2025-04-12T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-12T14:55:01.378947Z"
     },
     {
       "match_number": 27,
@@ -429,8 +429,8 @@
         }
       },
       "start_time": "2025-04-12T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-12T18:40:01.048989Z"
     },
     {
       "match_number": 28,
@@ -445,8 +445,8 @@
         }
       },
       "start_time": "2025-04-13T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-13T14:55:01.517991Z"
     },
     {
       "match_number": 29,
@@ -461,8 +461,8 @@
         }
       },
       "start_time": "2025-04-13T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-13T18:55:01.637371Z"
     },
     {
       "match_number": 30,
@@ -477,8 +477,8 @@
         }
       },
       "start_time": "2025-04-14T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-14T18:55:05.301183Z"
     },
     {
       "match_number": 31,
@@ -493,8 +493,8 @@
         }
       },
       "start_time": "2025-04-15T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-15T18:55:01.467401Z"
     },
     {
       "match_number": 32,
@@ -509,8 +509,8 @@
         }
       },
       "start_time": "2025-04-16T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-16T18:55:05.878652Z"
     },
     {
       "match_number": 33,
@@ -525,8 +525,8 @@
         }
       },
       "start_time": "2025-04-17T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-17T18:55:01.533288Z"
     },
     {
       "match_number": 34,
@@ -541,8 +541,8 @@
         }
       },
       "start_time": "2025-04-18T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-18T18:50:01.833361Z"
     },
     {
       "match_number": 35,
@@ -557,8 +557,8 @@
         }
       },
       "start_time": "2025-04-19T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-19T14:55:01.623906Z"
     },
     {
       "match_number": 36,
@@ -573,8 +573,8 @@
         }
       },
       "start_time": "2025-04-19T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-19T18:55:01.521992Z"
     },
     {
       "match_number": 37,
@@ -589,8 +589,8 @@
         }
       },
       "start_time": "2025-04-20T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-20T14:55:00.552212Z"
     },
     {
       "match_number": 38,
@@ -605,8 +605,8 @@
         }
       },
       "start_time": "2025-04-20T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-20T18:55:01.679846Z"
     },
     {
       "match_number": 39,
@@ -621,8 +621,8 @@
         }
       },
       "start_time": "2025-04-21T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-21T18:55:05.850851Z"
     },
     {
       "match_number": 40,
@@ -637,8 +637,8 @@
         }
       },
       "start_time": "2025-04-22T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-22T18:55:05.077046Z"
     },
     {
       "match_number": 41,
@@ -653,8 +653,8 @@
         }
       },
       "start_time": "2025-04-23T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-23T18:55:01.583151Z"
     },
     {
       "match_number": 42,
@@ -669,8 +669,8 @@
         }
       },
       "start_time": "2025-04-24T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-24T18:55:02.028455Z"
     },
     {
       "match_number": 43,
@@ -685,8 +685,8 @@
         }
       },
       "start_time": "2025-04-25T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-25T18:55:05.928280Z"
     },
     {
       "match_number": 44,
@@ -701,8 +701,8 @@
         }
       },
       "start_time": "2025-04-26T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-26T18:55:01.805237Z"
     },
     {
       "match_number": 45,
@@ -717,8 +717,8 @@
         }
       },
       "start_time": "2025-04-27T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-27T15:05:01.535251Z"
     },
     {
       "match_number": 46,
@@ -729,12 +729,12 @@
           "gameweek_match": 1
         },
         "Royal Challengers Bengaluru": {
-          "gameweek_match": 1
+          "gameweek_match": 2
         }
       },
       "start_time": "2025-04-27T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "in_progress",
+      "last_update": "2025-04-27T16:40:01.081894Z"
     },
     {
       "match_number": 47,
