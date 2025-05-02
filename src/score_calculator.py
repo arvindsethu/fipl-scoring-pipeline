@@ -243,7 +243,7 @@ def calculate_bowling_points(stats: Dict[str, Any], player_name: str) -> tuple[f
             elif economy < 2:
                 economy_points += scoring_rules['economy_rate']['one_to_two_overs']['below_2'][player_role]
         
-        if overs > 2.1:
+        if overs >= 2.1:
             # 2.1+ overs rules
             if 15 <= economy < 18:
                 economy_points += scoring_rules['economy_rate']['min_2.1_overs']['15_to_17.99'][player_role]

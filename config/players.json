@@ -700,6 +700,11 @@
       "role": "Bowler"
     },
     {
+      "name": "Raghu Sharma",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
       "name": "Ashwani Kumar",
       "team": "Mumbai Indians",
       "role": "Bowler"
@@ -1111,6 +1116,11 @@
     },
     {
       "name": "Atharva Taide",
+      "team": "Sunrisers Hyderabad",
+      "role": "Batter"
+    },
+    {
+      "name": "Ravichandran Smaran",
       "team": "Sunrisers Hyderabad",
       "role": "Batter"
     },
