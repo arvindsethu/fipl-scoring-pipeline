@@ -3,7 +3,6 @@ credentials.json
 sheets_config.py
 demo.json
 manual_tools/outputs/
-manual_tools/helpers/
 
 # Python
 __pycache__/
