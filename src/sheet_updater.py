@@ -75,8 +75,8 @@ def load_matches():
         raise
 
 def validate_column_format(column: str) -> bool:
-    """Validate if column format is correct (A-Z or AA-ZZ)"""
-    return bool(re.match(r'^[A-Z]{1,2}$', column))
+    """Validate if column format is correct (A-Z, AA-ZZ, or AAA-ZZZ)"""
+    return bool(re.match(r'^[A-Z]{1,3}$', column))
 
 def get_column_range(sheet_mappings, gameweek, match_num):
     """Get column range for a specific gameweek and match number with validation"""
