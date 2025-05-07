@@ -136,6 +136,11 @@
       "role": "Keeper"
     },
     {
+      "name": "Urvil Patel",
+      "team": "Chennai Superkings",
+      "role": "Keeper"
+    },
+    {
       "name": "Axar Patel",
       "team": "Delhi Capitals",
       "role": "Allrounder"
@@ -805,6 +810,11 @@
       "role": "Batter"
     },
     {
+      "name": "Mitchell Owen",
+      "team": "Punjab Kings",
+      "role": "Batter"
+    },
+    {
       "name": "Pyla Avinash",
       "team": "Punjab Kings",
       "role": "Batter"
@@ -1173,6 +1183,11 @@
       "name": "Zeeshan Ansari",
       "team": "Sunrisers Hyderabad",
       "role": "Bowler"
+    },
+    {
+      "name": "Harsh Dubey",
+      "team": "Sunrisers Hyderabad",
+      "role": "Allrounder"
     },
     {
       "name": "Heinrich Klaasen",
