@@ -108,7 +108,7 @@ def get_column_range(sheet_mappings, gameweek, match_num):
 
 def find_player_row(sheet_service, player_name):
     """Find row number for a player"""
-    range_name = f'A4:A240'  # Player names column
+    range_name = f'A4:A255'  # Player names column
     result = sheet_service.values().get(
         spreadsheetId=sheets_config.SPREADSHEET_ID,
         range=range_name

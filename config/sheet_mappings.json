@@ -2,7 +2,7 @@
   "sheet_info": {
     "player_name_column": "A",
     "player_name_start_row": 4,
-    "player_name_end_row": 240
+    "player_name_end_row": 255
   },
   "team_stats": {
     "start_row": 256,
