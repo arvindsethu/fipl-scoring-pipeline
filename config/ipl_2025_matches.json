@@ -733,8 +733,8 @@
         }
       },
       "start_time": "2025-04-27T14:07:00Z",
-      "status": "in_progress",
-      "last_update": "2025-04-27T16:40:01.081894Z"
+      "status": "completed",
+      "last_update": "2025-04-27T18:55:05.115496Z"
     },
     {
       "match_number": 47,
@@ -749,8 +749,8 @@
         }
       },
       "start_time": "2025-04-28T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-28T18:55:01.220432Z"
     },
     {
       "match_number": 48,
@@ -765,8 +765,8 @@
         }
       },
       "start_time": "2025-04-29T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-29T18:55:01.653763Z"
     },
     {
       "match_number": 49,
@@ -781,8 +781,8 @@
         }
       },
       "start_time": "2025-04-30T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-04-30T18:55:05.078150Z"
     },
     {
       "match_number": 50,
@@ -797,8 +797,8 @@
         }
       },
       "start_time": "2025-05-01T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-01T18:55:01.482609Z"
     },
     {
       "match_number": 51,
@@ -813,8 +813,8 @@
         }
       },
       "start_time": "2025-05-02T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-02T18:55:01.692179Z"
     },
     {
       "match_number": 52,
@@ -829,8 +829,8 @@
         }
       },
       "start_time": "2025-05-03T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-03T18:55:01.772902Z"
     },
     {
       "match_number": 53,
@@ -845,8 +845,8 @@
         }
       },
       "start_time": "2025-05-04T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-04T14:55:05.655338Z"
     },
     {
       "match_number": 54,
@@ -861,8 +861,8 @@
         }
       },
       "start_time": "2025-05-04T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-04T18:55:01.677005Z"
     },
     {
       "match_number": 55,
@@ -877,8 +877,8 @@
         }
       },
       "start_time": "2025-05-05T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-05T18:55:05.199819Z"
     },
     {
       "match_number": 56,
@@ -893,8 +893,8 @@
         }
       },
       "start_time": "2025-05-06T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-06T18:55:01.173798Z"
     },
     {
       "match_number": 57,
@@ -909,194 +909,34 @@
         }
       },
       "start_time": "2025-05-07T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-07T18:55:05.232055Z"
     },
     {
       "match_number": 58,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/punjab-kings-vs-delhi-capitals-58th-match-1473495/full-scorecard",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/royal-challengers-bengaluru-vs-kolkata-knight-riders-58th-match-1473496/full-scorecard",
       "gameweek": 12,
       "teams": {
-        "Punjab Kings": {
+        "Royal Challengers Bengaluru": {
           "gameweek_match": 1
         },
-        "Delhi Capitals": {
-          "gameweek_match": 1
+        "Kolkata Knight Riders": {
+          "gameweek_match": 2
         }
       },
-      "start_time": "2025-05-08T14:07:00Z",
+      "start_time": "2025-05-017T14:07:00Z",
       "status": "not_started",
       "last_update": null
     },
     {
       "match_number": 59,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/lucknow-super-giants-vs-royal-challengers-bengaluru-59th-match-1473496/full-scorecard",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/rajasthan-royals-vs-punjab-kings-59th-match-1473497/full-scorecard",
       "gameweek": 12,
-      "teams": {
-        "Lucknow Super Giants": {
-          "gameweek_match": 1
-        },
-        "Royal Challengers Bengaluru": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-09T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 60,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/sunrisers-hyderabad-vs-kolkata-knight-riders-60th-match-1473497/full-scorecard",
-      "gameweek": 12,
-      "teams": {
-        "Sunrisers Hyderabad": {
-          "gameweek_match": 1
-        },
-        "Kolkata Knight Riders": {
-          "gameweek_match": 2
-        }
-      },
-      "start_time": "2025-05-10T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 61,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/punjab-kings-vs-mumbai-indians-61st-match-1473498/full-scorecard",
-      "gameweek": 13,
-      "teams": {
-        "Punjab Kings": {
-          "gameweek_match": 1
-        },
-        "Mumbai Indians": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-11T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 62,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/delhi-capitals-vs-gujarat-titans-62nd-match-1473499/full-scorecard",
-      "gameweek": 13,
-      "teams": {
-        "Delhi Capitals": {
-          "gameweek_match": 1
-        },
-        "Gujarat Titans": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-11T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 63,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/chennai-super-kings-vs-rajasthan-royals-63rd-match-1473500/full-scorecard",
-      "gameweek": 13,
-      "teams": {
-        "Chennai Super Kings": {
-          "gameweek_match": 1
-        },
-        "Rajasthan Royals": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-12T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 64,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/royal-challengers-bengaluru-vs-sunrisers-hyderabad-64th-match-1473501/full-scorecard",
-      "gameweek": 13,
-      "teams": {
-        "Royal Challengers Bengaluru": {
-          "gameweek_match": 1
-        },
-        "Sunrisers Hyderabad": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-13T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 65,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/gujarat-titans-vs-lucknow-super-giants-65th-match-1473502/full-scorecard",
-      "gameweek": 13,
-      "teams": {
-        "Gujarat Titans": {
-          "gameweek_match": 2
-        },
-        "Lucknow Super Giants": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-14T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 66,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/mumbai-indians-vs-delhi-capitals-66th-match-1473503/full-scorecard",
-      "gameweek": 14,
-      "teams": {
-        "Mumbai Indians": {
-          "gameweek_match": 1
-        },
-        "Delhi Capitals": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-15T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 67,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/rajasthan-royals-vs-punjab-kings-67th-match-1473504/full-scorecard",
-      "gameweek": 14,
       "teams": {
         "Rajasthan Royals": {
           "gameweek_match": 1
         },
         "Punjab Kings": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-16T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 68,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/royal-challengers-bengaluru-vs-kolkata-knight-riders-68th-match-1473505/full-scorecard",
-      "gameweek": 14,
-      "teams": {
-        "Royal Challengers Bengaluru": {
-          "gameweek_match": 1
-        },
-        "Kolkata Knight Riders": {
-          "gameweek_match": 1
-        }
-      },
-      "start_time": "2025-05-17T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
-    },
-    {
-      "match_number": 69,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/gujarat-titans-vs-chennai-super-kings-69th-match-1473506/full-scorecard",
-      "gameweek": 14,
-      "teams": {
-        "Gujarat Titans": {
-          "gameweek_match": 1
-        },
-        "Chennai Super Kings": {
           "gameweek_match": 1
         }
       },
@@ -1105,14 +945,14 @@
       "last_update": null
     },
     {
-      "match_number": 70,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/lucknow-super-giants-vs-sunrisers-hyderabad-70th-match-1473507/full-scorecard",
-      "gameweek": 14,
+      "match_number": 60,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/delhi-capitals-vs-gujarat-titans-60th-match-1473498/full-scorecard",
+      "gameweek": 12,
       "teams": {
-        "Lucknow Super Giants": {
+        "Delhi Capitals": {
           "gameweek_match": 1
         },
-        "Sunrisers Hyderabad": {
+        "Gujarat Titans": {
           "gameweek_match": 1
         }
       },
@@ -1121,14 +961,30 @@
       "last_update": null
     },
     {
-      "match_number": 71,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-qualifier-1-1473508/full-scorecard",
-      "gameweek": 15,
+      "match_number": 61,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/lucknow-super-giants-vs-sunrisers-hyderabad-61st-match-1473499/full-scorecard",
+      "gameweek": 13,
       "teams": {
-        "TBA": {
+        "Lucknow Super Giants": {
           "gameweek_match": 1
         },
-        "TBA2": {
+        "Sunrisers Hyderabad": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-19T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 62,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/chennai-super-kings-vs-rajasthan-royals-62nd-match-1473500/full-scorecard",
+      "gameweek": 13,
+      "teams": {
+        "Chennai Super Kings": {
+          "gameweek_match": 1
+        },
+        "Rajasthan Royals": {
           "gameweek_match": 1
         }
       },
@@ -1137,14 +993,14 @@
       "last_update": null
     },
     {
-      "match_number": 72,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-eliminator-1473509/full-scorecard",
-      "gameweek": 15,
+      "match_number": 63,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/mumbai-indians-vs-delhi-capitals-63rd-match-1473501/full-scorecard",
+      "gameweek": 13,
       "teams": {
-        "TBA": {
+        "Mumbai Indians": {
           "gameweek_match": 1
         },
-        "TBA2": {
+        "Delhi Capitals": {
           "gameweek_match": 1
         }
       },
@@ -1153,14 +1009,30 @@
       "last_update": null
     },
     {
-      "match_number": 73,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-qualifier-2-1473510/full-scorecard",
-      "gameweek": 15,
+      "match_number": 64,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/gujarat-titans-vs-lucknow-super-giants-64th-match-1473502/full-scorecard",
+      "gameweek": 13,
       "teams": {
-        "TBA": {
-          "gameweek_match": 2
+        "Gujarat Titans": {
+          "gameweek_match": 1
         },
-        "TBA2": {
+        "Lucknow Super Giants": {
+          "gameweek_match": 2
+        }
+      },
+      "start_time": "2025-05-22T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 65,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/royal-challengers-bengaluru-vs-sunrisers-hyderabad-65th-match-1473503/full-scorecard",
+      "gameweek": 13,
+      "teams": {
+        "Royal Challengers Bengaluru": {
+          "gameweek_match": 1
+        },
+        "Sunrisers Hyderabad": {
           "gameweek_match": 2
         }
       },
@@ -1169,8 +1041,136 @@
       "last_update": null
     },
     {
+      "match_number": 66,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/delhi-capitals-vs-punjab-kings-66th-match-1485779/full-scorecard",
+      "gameweek": 14,
+      "teams": {
+        "Delhi Capitals": {
+          "gameweek_match": 1
+        },
+        "Punjab Kings": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-24T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 67,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/gujarat-titans-vs-chennai-super-kings-67th-match-1473504/full-scorecard",
+      "gameweek": 14,
+      "teams": {
+        "Gujarat Titans": {
+          "gameweek_match": 1
+        },
+        "Chennai Super Kings": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-25T10:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 68,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/kolkata-knight-riders-vs-sunrisers-hyderabad-68th-match-1473505/full-scorecard",
+      "gameweek": 14,
+      "teams": {
+        "Kolkata Knight Riders": {
+          "gameweek_match": 1
+        },
+        "Sunrisers Hyderabad": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-25T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 69,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/mumbai-indians-vs-punjab-kings-69th-match-1473506/full-scorecard",
+      "gameweek": 14,
+      "teams": {
+        "Mumbai Indians": {
+          "gameweek_match": 1
+        },
+        "Punjab Kings": {
+          "gameweek_match": 2
+        }
+      },
+      "start_time": "2025-05-26T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 70,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/lucknow-super-giants-vs-royal-challengers-bengaluru-70th-match-1473507/full-scorecard",
+      "gameweek": 14,
+      "teams": {
+        "Lucknow Super Giants": {
+          "gameweek_match": 1
+        },
+        "Royal Challengers Bengaluru": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-27T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 71,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-qualifier-1-1473508/live-cricket-score",
+      "gameweek": 15,
+      "teams": {
+        "TBA": {
+          "gameweek_match": 1
+        },
+        "TBA2": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-29T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 72,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-eliminator-1473509/live-cricket-score",
+      "gameweek": 15,
+      "teams": {
+        "TBA": {
+          "gameweek_match": 1
+        },
+        "TBA2": {
+          "gameweek_match": 1
+        }
+      },
+      "start_time": "2025-05-30T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
+      "match_number": 73,
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-qualifier-2-1473510/live-cricket-score",
+      "gameweek": 15,
+      "teams": {
+        "TBA": {
+          "gameweek_match": 2
+        },
+        "TBA2": {
+          "gameweek_match": 2
+        }
+      },
+      "start_time": "2025-06-01T14:07:00Z",
+      "status": "not_started",
+      "last_update": null
+    },
+    {
       "match_number": 74,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-final-1473511/full-scorecard",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-final-1473511/live-cricket-score",
       "gameweek": 15,
       "teams": {
         "TBA": {
@@ -1180,7 +1180,7 @@
           "gameweek_match": 3
         }
       },
-      "start_time": "2025-05-25T14:07:00Z",
+      "start_time": "2025-06-03T14:07:00Z",
       "status": "not_started",
       "last_update": null
     }

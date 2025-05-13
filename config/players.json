@@ -191,6 +191,11 @@
       "role": "Batter"
     },
     {
+      "name": "Sediqullah Atal",
+      "team": "Delhi Capitals",
+      "role": "Batter"
+    },
+    {
       "name": "Harry Brook",
       "team": "Delhi Capitals",
       "role": "Batter"
@@ -970,7 +975,17 @@
       "role": "Bowler"
     },
     {
+      "name": "Nandre Burger",
+      "team": "Rajasthan Royals",
+      "role": "Bowler"
+    },
+    {
       "name": "Sanju Samson",
+      "team": "Rajasthan Royals",
+      "role": "Keeper"
+    },
+    {
+      "name": "Lhuan-dre Pretorius",
       "team": "Rajasthan Royals",
       "role": "Keeper"
     },
@@ -1021,6 +1036,11 @@
     },
     {
       "name": "Devdutt Padikkal",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Batter"
+    },
+    {
+      "name": "Mayank Agarwal",
       "team": "Royal Challengers Bengaluru",
       "role": "Batter"
     },
