@@ -390,6 +390,11 @@
       "role": "Keeper"
     },
     {
+      "name": "Kusal Mendis",
+      "team": "Gujarat Titans",
+      "role": "Keeper"
+    },
+    {
       "name": "Anuj Rawat",
       "team": "Gujarat Titans",
       "role": "Keeper"
@@ -580,6 +585,11 @@
       "role": "Bowler"
     },
     {
+      "name": "Will O'Rourke",
+      "team": "Lucknow Supergiants",
+      "role": "Bowler"
+    },
+    {
       "name": "Mohsin Khan",
       "team": "Lucknow Supergiants",
       "role": "Bowler"
@@ -670,6 +680,11 @@
       "role": "Keeper"
     },
     {
+      "name": "Jonny Bairstow",
+      "team": "Mumbai Indians",
+      "role": "Keeper"
+    },
+    {
       "name": "Will Jacks",
       "team": "Mumbai Indians",
       "role": "Batter"
@@ -681,6 +696,11 @@
     },
     {
       "name": "Jasprit Bumrah",
+      "team": "Mumbai Indians",
+      "role": "Bowler"
+    },
+    {
+      "name": "Richard Gleeson",
       "team": "Mumbai Indians",
       "role": "Bowler"
     },
@@ -851,6 +871,11 @@
     },
     {
       "name": "Lockie Ferguson",
+      "team": "Punjab Kings",
+      "role": "Bowler"
+    },
+    {
+      "name": "Kyle Jamieson",
       "team": "Punjab Kings",
       "role": "Bowler"
     },
