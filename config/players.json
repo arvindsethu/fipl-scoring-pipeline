@@ -470,6 +470,11 @@
       "role": "Bowler"
     },
     {
+      "name": "Shivam Shukla",
+      "team": "Kolkata Knight Riders",
+      "role": "Bowler"
+    },
+    {
       "name": "Anrich Nortje",
       "team": "Kolkata Knight Riders",
       "role": "Bowler"
@@ -658,6 +663,11 @@
       "name": "Raj Bawa",
       "team": "Mumbai Indians",
       "role": "Allrounder"
+    },
+    {
+      "name": "Charith Asalanka",
+      "team": "Mumbai Indians",
+      "role": "Batter"
     },
     {
       "name": "Suryakumar Yadav",
@@ -1116,6 +1126,11 @@
     },
     {
       "name": "Lungi Ngidi",
+      "team": "Royal Challengers Bengaluru",
+      "role": "Bowler"
+    },
+    {
+      "name": "Blessing Muzarabani",
       "team": "Royal Challengers Bengaluru",
       "role": "Bowler"
     },
