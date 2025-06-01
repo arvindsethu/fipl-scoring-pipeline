@@ -941,8 +941,8 @@
         }
       },
       "start_time": "2025-05-18T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-18T15:05:01.573692Z"
     },
     {
       "match_number": 60,
@@ -957,8 +957,8 @@
         }
       },
       "start_time": "2025-05-18T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-18T18:55:01.520596Z"
     },
     {
       "match_number": 61,
@@ -973,8 +973,8 @@
         }
       },
       "start_time": "2025-05-19T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-19T18:55:02.032599Z"
     },
     {
       "match_number": 62,
@@ -989,8 +989,8 @@
         }
       },
       "start_time": "2025-05-20T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-20T18:55:01.684126Z"
     },
     {
       "match_number": 63,
@@ -1005,8 +1005,8 @@
         }
       },
       "start_time": "2025-05-21T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-21T18:45:01.740835Z"
     },
     {
       "match_number": 64,
@@ -1021,8 +1021,8 @@
         }
       },
       "start_time": "2025-05-22T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-22T18:55:05.053459Z"
     },
     {
       "match_number": 65,
@@ -1037,8 +1037,8 @@
         }
       },
       "start_time": "2025-05-23T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-23T18:55:00.763074Z"
     },
     {
       "match_number": 66,
@@ -1053,8 +1053,8 @@
         }
       },
       "start_time": "2025-05-24T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-24T18:55:01.596591Z"
     },
     {
       "match_number": 67,
@@ -1069,8 +1069,8 @@
         }
       },
       "start_time": "2025-05-25T10:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-25T14:55:01.197872Z"
     },
     {
       "match_number": 68,
@@ -1085,8 +1085,8 @@
         }
       },
       "start_time": "2025-05-25T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-25T18:55:01.569323Z"
     },
     {
       "match_number": 69,
@@ -1101,8 +1101,8 @@
         }
       },
       "start_time": "2025-05-26T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-26T18:55:05.606817Z"
     },
     {
       "match_number": 70,
@@ -1117,50 +1117,50 @@
         }
       },
       "start_time": "2025-05-27T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-27T18:55:01.935857Z"
     },
     {
       "match_number": 71,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-qualifier-1-1473508/live-cricket-score",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/punjab-kings-vs-royal-challengers-bengaluru-qualifier-1-1473508/full-scorecard",
       "gameweek": 15,
       "teams": {
-        "TBA": {
+        "Punjab Kings": {
           "gameweek_match": 1
         },
-        "TBA2": {
+        "Royal Challengers Bengaluru": {
           "gameweek_match": 1
         }
       },
       "start_time": "2025-05-29T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-29T18:55:01.939120Z"
     },
     {
       "match_number": 72,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-eliminator-1473509/live-cricket-score",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/gujarat-titans-vs-mumbai-indians-eliminator-1473509/full-scorecard",
       "gameweek": 15,
       "teams": {
-        "TBA": {
+        "Gujarat Titans": {
           "gameweek_match": 1
         },
-        "TBA2": {
+        "Mumbai Indians": {
           "gameweek_match": 1
         }
       },
       "start_time": "2025-05-30T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-05-30T18:55:05.894894Z"
     },
     {
       "match_number": 73,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-qualifier-2-1473510/live-cricket-score",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/mumbai-indians-vs-punjab-kings-qualifier-2-1473510/full-scorecard",
       "gameweek": 15,
       "teams": {
-        "TBA": {
+        "Mumbai Indians": {
           "gameweek_match": 2
         },
-        "TBA2": {
+        "Punjab Kings": {
           "gameweek_match": 2
         }
       },
