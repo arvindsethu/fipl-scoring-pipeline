@@ -1165,18 +1165,18 @@
         }
       },
       "start_time": "2025-06-01T14:07:00Z",
-      "status": "not_started",
-      "last_update": null
+      "status": "completed",
+      "last_update": "2025-06-01T18:55:00.726063Z"
     },
     {
       "match_number": 74,
-      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/tba-vs-tba-final-1473511/live-cricket-score",
+      "url": "https://www.espncricinfo.com/series/ipl-2025-1449924/punjab-kings-vs-royal-challengers-bengaluru-final-1473511/full-scorecard",
       "gameweek": 15,
       "teams": {
-        "TBA": {
+        "Punjab Kings": {
           "gameweek_match": 3
         },
-        "TBA2": {
+        "Royal Challengers Bengaluru": {
           "gameweek_match": 3
         }
       },

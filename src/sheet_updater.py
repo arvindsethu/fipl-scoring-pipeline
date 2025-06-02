@@ -11,7 +11,7 @@ from googleapiclient.discovery import build
 from googleapiclient import errors
 from .scorecard_scraper import scrape_scorecard
 from .score_calculator import calculate_scores_and_update_sheet
-import sheets_config
+from config import sheets_config
 
 # Constants
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

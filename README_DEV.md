@@ -1,3 +1,54 @@
+# Development Guide
+
+## Quick Reference Commands
+
+### Deployment Commands
+
+#### Deploy Cloud Function
+```bash
+gcloud functions deploy fipl-score-updater --gen2 --runtime=python39 --region=europe-west2 --source=. --entry-point=update_scores --trigger-http --memory=1024MB --timeout=540s --min-instances=0 --max-instances=1 --service-account=fipl-scoring-service@intense-context-454213-u3.iam.gserviceaccount.com --allow-unauthenticated
+```
+
+#### Update Match Configuration in Cloud Storage
+```bash
+# Download current state from bucket
+gsutil cp gs://fipl_bucket/match_states/ipl_2025_matches.json config/ipl_2025_matches.json 
+
+# Upload updated configuration to bucket
+gsutil cp config/ipl_2025_matches.json gs://fipl_bucket/match_states/ipl_2025_matches.json
+```
+
+### Manual Testing Commands
+
+#### Process Specific Match (Full Pipeline)
+```bash
+python manual_tools/scripts/run_pipeline.py --match-number <number>
+```
+
+#### Process Match in Dry Run Mode (No Sheet Updates)
+```bash
+python manual_tools/scripts/run_pipeline.py --match-number <number> --dry
+```
+
+#### Process Any Scorecard URL (Scraping Only)
+```bash
+python manual_tools/scripts/run_pipeline.py --url <scorecard_url>
+```
+
+#### Examples
+```bash
+# Process match 5 with full sheet updates
+python manual_tools/scripts/run_pipeline.py --match-number 5
+
+# Test match 5 without affecting live data
+python manual_tools/scripts/run_pipeline.py --match-number 5 --dry
+
+# Process any ESPNCricinfo scorecard
+python manual_tools/scripts/run_pipeline.py --url "https://www.espncricinfo.com/series/..."
+```
+
+---
+
 ## Components
 
 ### 1. Match Data Scraping (`scorecard_scraper.py`)
@@ -28,34 +79,17 @@
 
 ### 5. Manual Testing Tools (`manual_tools/`)
 - Local testing and demonstration utilities
-- Three modes of operation:
-  1. Match Number Mode:
-     ```bash
-     python manual_tools/scripts/run_pipeline.py --match-number <number>
-     ```
-     - Reads match data from `ipl_2025_matches.json`
-     - Runs complete pipeline including sheet updates
-     - Useful for testing specific matches
-
-  2. Direct URL Mode:
-     ```bash
-     python manual_tools/scripts/run_pipeline.py --url <scorecard_url>
-     ```
-     - Processes any ESPNCricinfo scorecard URL
-     - Runs scraper and calculator only (no sheet updates)
-     - Useful for quick testing and demonstrations
-
-  3. Dry Run Mode:
-     ```bash
-     python manual_tools/scripts/run_pipeline.py --match-number <number> --dry
-     ```
-     - Uses match data from `ipl_2025_matches.json`
-     - Runs complete pipeline but skips sheet updates
-     - Useful for testing specific matches without affecting live data
-
 - Output is always saved to `manual_tools/outputs/scorecard.json`
 - Handles quoted and unquoted URLs
 - Provides progress feedback during execution
+
+#### Three modes of operation:
+
+1. **Match Number Mode**: Reads match data from `ipl_2025_matches.json`, runs complete pipeline including sheet updates
+2. **Direct URL Mode**: Processes any ESPNCricinfo scorecard URL, runs scraper and calculator only (no sheet updates)  
+3. **Dry Run Mode**: Uses match data from `ipl_2025_matches.json`, runs complete pipeline but skips sheet updates
+
+See command reference at the top of this document for usage examples.
 
 ## Configuration Files
 

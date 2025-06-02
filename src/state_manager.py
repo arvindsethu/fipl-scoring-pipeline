@@ -2,7 +2,7 @@ import json
 import logging
 from google.cloud import storage
 from google.api_core import retry
-import sheets_config
+from config import sheets_config
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -14,8 +14,8 @@ class StateManager:
         """Initialize with bucket name and optional state file path"""
         self.bucket_name = bucket_name
         self.state_file_path = state_file_path or sheets_config.STATE_FILE
-        self.storage_client = storage.Client()
-        self.bucket = self.storage_client.bucket(bucket_name)
+        self.client = storage.Client()
+        self.bucket = self.client.bucket(bucket_name)
 
     @retry.Retry(predicate=retry.if_exception_type(Exception))
     def load_state(self):

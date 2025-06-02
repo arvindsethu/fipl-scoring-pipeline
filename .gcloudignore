@@ -18,4 +18,5 @@ whatsapp_bot/
 !src/
 !requirements.txt
 !main.py
-!sheets_config.py 
+!config/
+!config/sheets_config.py 
