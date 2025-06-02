@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import pytz
 import json
 import os
+import tempfile
 import functions_framework
 from src.sheet_updater import main as update_main
 from src.state_manager import StateManager
@@ -81,7 +82,7 @@ def get_update_frequency(match_start_time, current_time):
     hours_elapsed = (current_time - match_start_time).total_seconds() / 3600
     
     if hours_elapsed <= 7:
-        return 14  # First 5 hours: every 15 minutes
+        return 9  # First 5 hours: every 15 minutes
     else:
         return None  # Match should be completed
 
@@ -121,6 +122,37 @@ def should_process_match(match, current_time):
     except Exception as e:
         logger.error(f"Error processing match {match.get('match_number', 'Unknown')}: {str(e)}")
         return False, None, match.get('status', 'not_started')
+
+def format_match_scores(scorecard_data, match_teams, previous_scores=None):
+    """Format match scores into a simple string using original team names"""
+    try:
+        if not scorecard_data or not match_teams:
+            return previous_scores
+
+        score_parts = []
+        scored_teams = []
+
+        for team in match_teams:
+            team_data = scorecard_data.get(team, {})
+            team_score = team_data.get('team_score')
+
+            if team_score and team_score.get('score'):
+                overs = team_score.get('overs', '')
+                score_parts.append(f"{team} ({team_score['score']} from {overs})")
+                scored_teams.append(team)
+
+        # Only one team has a score — append the other team's name only
+        if len(score_parts) == 1 and len(match_teams) == 2:
+            other_team = next(t for t in match_teams if t not in scored_teams)
+            score_parts.append(other_team)
+
+        return " vs ".join(score_parts) if score_parts else previous_scores
+
+    except Exception as e:
+        logger.error(f"Error formatting match scores: {str(e)}")
+        return previous_scores
+
+
 
 @functions_framework.http
 def update_scores(request):
@@ -187,6 +219,19 @@ def update_scores(request):
                     if updated_match:  # Only update if we got a valid match back
                         match.update(updated_match)
                         match['last_update'] = format_datetime(current_time)
+                        
+                        # Get the scorecard data from temp file
+                        scorecard_path = os.path.join(tempfile.gettempdir(), f"scorecard_{match_num}.json")
+                        try:
+                            with open(scorecard_path, 'r', encoding='utf-8') as f:
+                                scorecard_data = json.load(f)
+                                # Format and update the scores field
+                                match['scores'] = format_match_scores(scorecard_data,
+                                                                      list(match.get('teams', {}).keys()),
+                                                                      match.get('scores'))
+                        except Exception as e:
+                            logger.warning(f"Could not update scores for match {match_num}: {str(e)}")
+                        
                         matches_updated = True
                         processed_matches.append(match_num)
                 except Exception as e:

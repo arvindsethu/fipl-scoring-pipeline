@@ -36,10 +36,7 @@ The system runs automatically during match hours (9:30 AM to 8:00 PM UTC) and:
 - **Google Sheets API**: Used for storing and displaying fantasy scores
 
 ### Update Frequency
-The system uses dynamic update frequencies based on match progression:
-- First 4 hours: Updates every 15 minutes
-- Next hour: Updates every 30 minutes
-- After 5 hours: Match marked as completed
+The system updates every 15 minutes for the 5 hours following the match start, before marking the match as complete
 
 ## Development
 

@@ -1166,7 +1166,8 @@
       },
       "start_time": "2025-06-01T14:07:00Z",
       "status": "completed",
-      "last_update": "2025-06-01T18:55:00.726063Z"
+      "last_update": "2025-06-01T18:55:01.313984Z",
+      "scores": "Mumbai Indians (203/6 from 20 Ov) vs Punjab Kings (207/5 from 19 Ov)"
     },
     {
       "match_number": 74,
@@ -1182,7 +1183,8 @@
       },
       "start_time": "2025-06-03T14:07:00Z",
       "status": "not_started",
-      "last_update": null
+      "last_update": null,
+      "scores": null
     }
   ]
 }

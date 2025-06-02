@@ -249,6 +249,34 @@ def extract_run_rate(innings_html: str) -> Optional[float]:
                 return None
     return None
 
+def extract_team_score(innings_html: str) -> Optional[Dict[str, str]]:
+    """Extract team score and overs from innings HTML content"""
+    try:
+        soup = BeautifulSoup(innings_html, 'html.parser')
+        
+        # Find score
+        score_td = soup.find('td', class_='ds-font-bold ds-bg-fill-content-alternate ds-text-tight-m ds-min-w-max ds-text-right ds-text-typo')
+        if not score_td:
+            return None
+        score = score_td.text.strip()
+        
+        # Find overs
+        target_td = soup.find('td', class_='ds-font-bold ds-bg-fill-content-alternate ds-text-tight-m ds-min-w-max !ds-pl-[100px]')
+
+        overs_text = None
+        if target_td:
+            overs_span = target_td.find('span', class_='ds-text-tight-s')
+            if overs_span:
+                overs_text = overs_span.text.strip()
+        
+        return {
+            "score": score,
+            "overs": overs_text
+        }
+    except Exception as e:
+        logger.error(f"Error extracting team score: {str(e)}")
+        return None
+
 def get_enhanced_headers():
     """Get enhanced headers that successfully bypass scraping protection"""
     user_agents = [
@@ -340,6 +368,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                     scorecard_data[team] = {
                         "average_economy": 0,
                         "average_strike_rate": 0,
+                        "team_score": None,
                         "player_stats": {}
                     }
         
@@ -355,6 +384,7 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                         scorecard_data[team_name] = {
                             "average_economy": 0,
                             "average_strike_rate": 0,
+                            "team_score": None,
                             "player_stats": {}
                         }
 
@@ -396,6 +426,11 @@ def scrape_scorecard(url: str) -> Dict[str, Any]:
                 logger.info("Updated %s avg SR: %.2f", batting_team, avg_strike_rate)
                 if bowling_team:
                     logger.info("Updated %s avg economy: %.2f", bowling_team, avg_economy)
+            
+            # Extract and store team score
+            team_score = extract_team_score(str(innings))
+            if team_score:
+                scorecard_data[batting_team]["team_score"] = team_score
             
             # Process batting
             batting_table = innings.find('table', class_='ci-scorecard-table')
