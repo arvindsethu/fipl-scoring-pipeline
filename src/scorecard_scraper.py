@@ -271,7 +271,7 @@ def extract_team_score(innings_html: str) -> Optional[Dict[str, str]]:
         
         return {
             "score": score,
-            "overs": overs_text
+            "overs": overs_text[:-3]
         }
     except Exception as e:
         logger.error(f"Error extracting team score: {str(e)}")
