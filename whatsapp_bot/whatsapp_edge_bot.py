@@ -9,7 +9,8 @@ from scores_message import get_scores_message
 import time
 
 # === CONFIGURATION ===
-
+# tasklist /FI "IMAGENAME eq msedge.exe"
+# taskkill /IM msedge.exe /F
 # Path to your Edge WebDriver executable
 edge_driver_path = r"C:\Users\arvin\Code\fipl-scoring-pipeline\whatsapp_bot\edgedriver_win64\msedgedriver.exe"
 
@@ -72,8 +73,8 @@ while True:
         time.sleep(5)
         driver.quit()
         
-        print("Waiting 10 minutes before next update...")
-        time.sleep(600)  # 600 seconds = 10 minutes
+        print("Waiting 15 minutes before next update...")
+        time.sleep(900)  # 900 seconds = 15 minutes
         
     except Exception as e:
         print(f"An error occurred: {str(e)}")
@@ -81,5 +82,5 @@ while True:
             driver.quit()
         except:
             pass
-        print("Retrying in 10 minutes...")
-        time.sleep(600)
+        print("Retrying in 15 minutes...")
+        time.sleep(900)

@@ -62,10 +62,12 @@ def get_match_data(matches_data, match_number):
     return None
 
 def format_time(timestamp_str):
-    """Format timestamp string to HH:MM format"""
+    """Format timestamp string to HH:MM BST format by adding 1 hour"""
     try:
         dt = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
-        return dt.strftime('%H:%M')
+        # Add one hour for BST
+        dt = dt.replace(hour=(dt.hour + 1) % 24)
+        return dt.strftime('%H:%M') + " BST"
     except Exception as e:
         logger.error(f"Error formatting timestamp: {str(e)}")
         return "Time unavailable"
@@ -80,7 +82,7 @@ def format_output(match_data, points_data):
     teams_points.sort(key=lambda x: x[1], reverse=True)
 
     # Create the message as a single string with \n for line breaks
-    message = "*FIPL SCORES UPDATE*\n"
+    message = "*FIPL FINAL SCORES BOT*\n"
     message += "━━━━━━━━━━━━━━━\n"
     message += f"Last update at: *{format_time(match_data.get('last_update', ''))}*\n"
     message += f"_{match_data.get('scores', 'Scores not available')}_\n"
@@ -107,7 +109,7 @@ def get_scores_message():
         bucket_name = "fipl_bucket"
         blob_path = "match_states/ipl_2025_matches.json"
         matches_data = read_json_from_gcs(bucket_name, blob_path)
-        match_data = get_match_data(matches_data, 73)
+        match_data = get_match_data(matches_data, 74)
 
         return format_output(match_data, points_range)
     except Exception as e:
